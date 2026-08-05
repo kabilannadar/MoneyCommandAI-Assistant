@@ -1,0 +1,1738 @@
+/* ============================================================
+   MoneyCommandAI Info-Tech Chatbot — Dark Theme Matching ExpenseTracker
+   Brand: Inter font, #6366f1 Indigo Accent
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --moneycommandai-blue: #6366f1;
+  --moneycommandai-blue-dark: #4f46e5;
+  --moneycommandai-blue-light: #1a1a26;
+  --moneycommandai-blue-mid: #252535;
+  --moneycommandai-blue-glow: rgba(99, 102, 241, 0.25);
+  --moneycommandai-red: #ef4444;
+  --moneycommandai-orange: #f97316;
+  --moneycommandai-yellow: #f59e0b;
+
+  /* Dark palette matching ExpenseTracker */
+  --moneycommandai-white: #1a1a26; /* Elevated message/container background */
+  --moneycommandai-bg: #0a0a0f; /* Base chat window content area */
+  --moneycommandai-surface: #111118; /* Container base surface */
+  --moneycommandai-surface2: #1e1e2e; /* Lightest elevated panel background (e.g. input) */
+  --moneycommandai-border: rgba(255, 255, 255, 0.12);
+  --moneycommandai-border-focus: rgba(99, 102, 241, 0.6);
+
+  --moneycommandai-text: #f1f5f9;
+  --moneycommandai-text-sub: #94a3b8;
+  --moneycommandai-text-muted: #64748b;
+
+  --moneycommandai-font: 'Inter', sans-serif;
+  --moneycommandai-radius: 16px;
+  --moneycommandai-radius-sm: 8px;
+  --moneycommandai-radius-msg: 12px;
+  --moneycommandai-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.3);
+  --moneycommandai-shadow-fab: 0 8px 28px rgba(99, 102, 241, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Page reset (inside iframe) ────────────────────────────────── */
+/* The iframe is permanently large. html/body must be pointer-events:none
+   so the invisible empty areas do not block parent-page clicks.
+   IMPORTANT: scope this to .in-iframe ONLY — otherwise it kills pointer
+   events on every other page (admin panel, agent dashboard, etc.). */
+.in-iframe html,
+.in-iframe body,
+html.in-iframe,
+body.in-iframe {
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* When NOT in an iframe, still reset margin/padding */
+html:not(.in-iframe),
+body:not(.in-iframe) {
+  margin: 0;
+  padding: 0;
+}
+
+/* ── FAB Container (holds tooltip + button together) ───────────────── */
+.moneycommandai-fab-container {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 9999;
+}
+
+/* ── Speech Bubble Tooltip ─────────────────────────────────────────── */
+.moneycommandai-fab-tooltip {
+  pointer-events: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, var(--moneycommandai-blue), var(--moneycommandai-blue-dark));
+  padding: 5px 28px;
+  border-radius: 40px;
+  font-family: var(--moneycommandai-font);
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: var(--moneycommandai-shadow-fab);
+  position: relative;
+  margin-right: 38px;
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.25s;
+}
+
+.moneycommandai-fab-tooltip--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  animation: moneycommandai-tooltip-float 3.5s ease-in-out infinite;
+}
+
+.moneycommandai-fab-tooltip--hidden {
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.moneycommandai-fab-tooltip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  animation-play-state: paused;
+}
+
+.moneycommandai-fab-tooltip span {
+  color: #ffffff;
+  display: inline-block;
+  font-weight: 700;
+}
+
+.moneycommandai-fab-tooltip__close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--moneycommandai-red);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0 0 2px 0;
+}
+
+.moneycommandai-fab-tooltip:hover .moneycommandai-fab-tooltip__close {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.moneycommandai-fab-tooltip__close:hover {
+  transform: scale(1.15);
+  background: #ff4e00;
+}
+
+/* Downward arrow – positioned left to align with FAB center */
+.moneycommandai-fab-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: 15px;
+  border-style: solid;
+  border-width: 9px 3px 0 12px;
+  border-color: var(--moneycommandai-blue-dark) transparent transparent transparent;
+  width: 0;
+  height: 0;
+}
+
+@keyframes moneycommandai-tooltip-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes moneycommandai-gradient-shift-bubble {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── Circular FAB Button ───────────────────────────────────────────── */
+.moneycommandai-fab {
+  pointer-events: auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, var(--moneycommandai-blue), var(--moneycommandai-blue-dark));
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--moneycommandai-shadow-fab);
+  overflow: visible;
+  animation: none;
+  transition: background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.25s ease,
+    transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.moneycommandai-fab:not(.moneycommandai-fab--open):hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.moneycommandai-fab:not(.moneycommandai-fab--open):active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.moneycommandai-fab--open {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: var(--moneycommandai-surface2);
+  color: var(--moneycommandai-text);
+  border: 1px solid transparent;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  animation: none;
+}
+
+/* Permanent icon stack styles inside the FAB */
+.moneycommandai-fab-icon-stack {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moneycommandai-fab-icon-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.moneycommandai-fab-icon--visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.moneycommandai-fab-icon--hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.moneycommandai-fab__text {
+  font-family: var(--moneycommandai-font);
+  font-weight: 600;
+  font-size: 16.5px;
+  white-space: nowrap;
+}
+
+.moneycommandai-fab__close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--moneycommandai-text);
+}
+
+
+
+@keyframes moneycommandai-fab-bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-4px);
+  }
+
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes moneycommandai-fab-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+/* ── Chat Window ───────────────────────────────────────────── */
+.moneycommandai-chat-window {
+  position: fixed;
+  right: 50px;
+  /* 50px (FAB bottom) + 74px (FAB height) + 36px (comfortable gap) = 160px */
+  bottom: 160px;
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  height: 600px;
+  max-height: calc(100vh - 180px);
+  background: var(--moneycommandai-surface);
+  border-radius: var(--moneycommandai-radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--moneycommandai-shadow);
+  border: 1px solid var(--moneycommandai-border);
+  z-index: 9998;
+  font-family: var(--moneycommandai-font);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px) scale(0.94);
+  transform-origin: bottom right;
+  transition: opacity 0.30s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.32s cubic-bezier(0.34, 1.20, 0.64, 1);
+}
+
+.moneycommandai-chat-window--open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+
+
+/* ── Header ─────────────────────────────────────────────────── */
+.moneycommandai-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0) 50.1%),
+    var(--moneycommandai-surface);
+  background-size: 200% 200%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 64px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* crisp top gloss line */
+  animation: moneycommandai-header-shine 7s ease-in-out infinite;
+}
+
+@keyframes moneycommandai-header-shine {
+
+  0%,
+  100% {
+    background-position: 0% 0%, 0 0, 0 0;
+  }
+
+  25% {
+    background-position: 100% 20%, 0 0, 0 0;
+  }
+
+  50% {
+    background-position: 80% 100%, 0 0, 0 0;
+  }
+
+  75% {
+    background-position: -20% 80%, 0 0, 0 0;
+  }
+}
+
+.moneycommandai-chat-header__border-line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 12.5%, #7c3aed 25%, #c084fc 37.5%, #3b82f6 50%, #d8b4fe 62.5%, #a855f7 75%, #2dd4bf 87.5%, #6366f1 100%);
+  background-size: 200% auto;
+  animation: moneycommandai-gradient-shift 4s linear infinite;
+  z-index: 10;
+}
+
+.moneycommandai-chat-header::before {
+  content: '₹';
+  position: absolute;
+  top: -2px;
+  right: 55px;
+  font-size: 34px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.05);
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.moneycommandai-chat-header::after {
+  content: '₹';
+  position: absolute;
+  bottom: 0px;
+  left: 38%;
+  font-size: 26px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.04);
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.moneycommandai-chat-header__brand::before {
+  content: '₹';
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.03);
+  transform: rotate(35deg);
+  pointer-events: none;
+}
+
+.moneycommandai-chat-header__brand::after {
+  content: '₹';
+  position: absolute;
+  bottom: 8px;
+  right: 120px;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.04);
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.moneycommandai-chat-header__info::before {
+  content: '₹';
+  position: absolute;
+  top: 15px;
+  right: 170px;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.03);
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+
+.moneycommandai-chat-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  z-index: 1;
+}
+
+.moneycommandai-chat-header__logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.moneycommandai-chat-header__logo:hover {
+  transform: scale(1.05);
+}
+
+.moneycommandai-chat-header__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.moneycommandai-chat-header__title {
+  color: #ffffff;
+  font-family: var(--moneycommandai-font);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.moneycommandai-chat-header__subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--moneycommandai-font);
+  font-size: 11px;
+  font-weight: 450;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.2;
+  letter-spacing: 0.1px;
+}
+
+.moneycommandai-chat-header__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  animation: moneycommandai-blink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes moneycommandai-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+}
+
+.moneycommandai-chat-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 1;
+}
+
+.moneycommandai-chat-header__refresh,
+.moneycommandai-chat-header__close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+
+  transition:
+    background-color .2s ease,
+    color .2s ease,
+    transform .2s ease;
+
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.moneycommandai-chat-header__refresh:hover,
+.moneycommandai-chat-header__close:hover {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+}
+
+.moneycommandai-chat-header__refresh:focus,
+.moneycommandai-chat-header__refresh:focus-visible,
+.moneycommandai-chat-header__refresh:active,
+.moneycommandai-chat-header__close:focus,
+.moneycommandai-chat-header__close:focus-visible,
+.moneycommandai-chat-header__close:active {
+  background: transparent;
+  color: rgba(255,255,255,.75);
+  outline: none;
+  box-shadow: none;
+}
+
+.moneycommandai-chat-header__close:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* ── Quick Action Tabs ──────────────────────────────────────── */
+.moneycommandai-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--moneycommandai-white);
+  border-bottom: 1px solid var(--moneycommandai-border);
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.moneycommandai-quick-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.moneycommandai-quick-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  border: 1.5px solid var(--moneycommandai-border);
+  border-radius: 999px;
+  padding: 5px 13px;
+  background: var(--moneycommandai-surface);
+  color: var(--moneycommandai-text);
+  font-family: var(--moneycommandai-font);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.moneycommandai-quick-actions button:hover {
+  background: var(--moneycommandai-blue);
+  border-color: var(--moneycommandai-blue);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 113, 184, 0.28);
+}
+
+
+/* ── Messages Container ─────────────────────────────────────── */
+.moneycommandai-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--moneycommandai-bg);
+  scroll-behavior: smooth;
+}
+
+.moneycommandai-chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.moneycommandai-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.moneycommandai-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--moneycommandai-border);
+  border-radius: 4px;
+}
+
+.moneycommandai-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #b8cfe0;
+}
+
+
+/* ── Home / Empty State ─────────────────────────────────────── */
+.moneycommandai-chat-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 24px 20px;
+  flex: 1;
+  text-align: center;
+  animation: moneycommandai-fadeup 0.5s ease;
+}
+
+/* Logo circle with soft blue glow — kept for possible future use */
+
+.moneycommandai-chat-home__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.moneycommandai-chat-home__title {
+  font-family: var(--moneycommandai-font);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--moneycommandai-text);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.moneycommandai-chat-home__sub {
+  font-family: var(--moneycommandai-font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--moneycommandai-text-sub);
+  margin: 0;
+  line-height: 1.65;
+  max-width: 270px;
+}
+
+/* Suggestion chips — small, subtle pills */
+.moneycommandai-chat-home__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.moneycommandai-chat-home__chip {
+  background: var(--moneycommandai-white);
+  border: 1.5px solid var(--moneycommandai-border);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-family: var(--moneycommandai-font);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--moneycommandai-text);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.moneycommandai-chat-home__chip:hover {
+  border-color: var(--moneycommandai-blue);
+  background: var(--moneycommandai-blue);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+
+
+
+/* ── Message Bubbles ────────────────────────────────────────── */
+.moneycommandai-chat-msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  animation: moneycommandai-fadeup 0.28s ease;
+}
+
+@keyframes moneycommandai-fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes msgAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.moneycommandai-chat-msg--bot {
+  align-self: flex-start;
+  flex-direction: row;
+}
+
+.moneycommandai-chat-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.moneycommandai-chat-msg__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.moneycommandai-chat-msg__bubble {
+  max-width: 78%;
+  padding: 12px 16px;
+  border-radius: var(--moneycommandai-radius-msg);
+  font-family: var(--moneycommandai-font);
+  font-size: 12.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.moneycommandai-chat-msg--bot .moneycommandai-chat-msg__bubble {
+  background: var(--moneycommandai-white);
+  color: var(--moneycommandai-text);
+  border: 1px solid var(--moneycommandai-border);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 3px 12px rgba(29, 113, 184, 0.04);
+  white-space: normal;
+}
+
+.moneycommandai-chat-msg--user .moneycommandai-chat-msg__bubble {
+  background: linear-gradient(135deg, var(--moneycommandai-blue) 0%, #0a2c5c 100%);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 16px rgba(29, 113, 184, 0.22);
+}
+
+.moneycommandai-chat-msg-time-container {
+  font-size: 10px;
+  color: var(--moneycommandai-text-muted);
+  margin-top: 3px;
+  margin-bottom: 4px;
+  letter-spacing: 0.1px;
+  font-family: var(--moneycommandai-font);
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.moneycommandai-chat-msg-time-container--bot {
+  margin-left: 4px;
+  align-self: flex-start;
+}
+
+.moneycommandai-chat-msg-time-container--user {
+  margin-right: 4px;
+  align-self: flex-end;
+}
+
+
+/* ── Typing Indicator ───────────────────────────────────────── */
+.moneycommandai-chat-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+  background: var(--moneycommandai-white);
+  border: 1px solid var(--moneycommandai-border);
+  border-radius: var(--moneycommandai-radius-msg);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.moneycommandai-chat-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--moneycommandai-text-muted);
+  animation: moneycommandai-dot-bounce 1.4s ease-in-out infinite;
+}
+
+.moneycommandai-chat-typing span:nth-child(2) {
+  animation-delay: 0.20s;
+}
+
+.moneycommandai-chat-typing span:nth-child(3) {
+  animation-delay: 0.40s;
+}
+
+.moneycommandai-chat-typing small {
+  font-family: var(--moneycommandai-font);
+  font-size: 11.5px;
+  color: var(--moneycommandai-text-muted);
+  margin-left: 4px;
+}
+
+@keyframes moneycommandai-dot-bounce {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    background: var(--moneycommandai-text-muted);
+  }
+
+  30% {
+    transform: translateY(-6px);
+    background: var(--moneycommandai-blue);
+  }
+}
+
+
+/* ── Input Area ─────────────────────────────────────────────── */
+.moneycommandai-chat-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--moneycommandai-white);
+  border-top: 1px solid var(--moneycommandai-border);
+  flex-shrink: 0;
+}
+
+.moneycommandai-chat-input {
+  flex: 1;
+  background: var(--moneycommandai-surface2);
+  color: var(--moneycommandai-text);
+  border: 1.5px solid var(--moneycommandai-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: var(--moneycommandai-font);
+  font-size: 13.5px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0;
+}
+
+.moneycommandai-chat-input::placeholder {
+  color: var(--moneycommandai-text-muted);
+}
+
+.moneycommandai-chat-input:focus {
+  border-color: var(--moneycommandai-blue);
+  background: var(--moneycommandai-white);
+  box-shadow: 0 0 0 3px var(--moneycommandai-blue-glow);
+}
+
+.moneycommandai-chat-input:disabled {
+  background: var(--moneycommandai-bg);
+  color: var(--moneycommandai-text-muted);
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.moneycommandai-chat-send {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: none;
+  background: var(--moneycommandai-surface2);
+  color: var(--moneycommandai-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.moneycommandai-chat-send--active {
+  background: linear-gradient(135deg, var(--moneycommandai-blue) 0%, var(--moneycommandai-blue-dark) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px var(--moneycommandai-blue-glow);
+}
+
+.moneycommandai-chat-send--active:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.moneycommandai-chat-send:not(.moneycommandai-chat-send--active):hover {
+  background: var(--moneycommandai-blue-light);
+  color: var(--moneycommandai-blue);
+}
+
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.moneycommandai-chat-footer {
+  padding: 7px 14px 9px;
+  background: var(--moneycommandai-white);
+  text-align: center;
+  font-family: var(--moneycommandai-font);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--moneycommandai-text-muted);
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--moneycommandai-border);
+}
+
+.moneycommandai-chat-footer__brand {
+  color: var(--moneycommandai-blue);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Large Desktop / Default fallback (> 500px iframe) ────────── */
+/* Base styles already handle this: 420px wide, right: 50px, bottom: 160px. */
+
+/* ── Tablet (461px – 500px iframe) ───────────────────────────── */
+@media (min-width: 461px) and (max-width: 500px) {
+  .moneycommandai-fab-container {
+    right: 30px;
+    bottom: 30px;
+  }
+
+  .moneycommandai-chat-window {
+    right: 30px;
+    bottom: 140px;
+    width: 420px;
+    height: 580px;
+    max-height: calc(100vh - 100px);
+  }
+
+  .moneycommandai-fab-tooltip {
+    font-size: 12px;
+    padding: 4px 20px;
+  }
+
+  /* Wider bubbles on tablet */
+  .moneycommandai-chat-msg__bubble {
+    max-width: 84%;
+  }
+
+  /* Comfortable tap targets on tablet */
+  .moneycommandai-chat-home__chip {
+    min-height: 40px;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .moneycommandai-quick-actions button {
+    min-height: 40px;
+    padding: 6px 16px;
+  }
+}
+
+/* ── Small Desktop (440px – 460px iframe) ────────────────────── */
+@media (min-width: 440px) and (max-width: 460px) {
+  .moneycommandai-fab-container {
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .moneycommandai-chat-window {
+    right: 20px;
+    bottom: 130px;
+    width: 420px;
+    height: 560px;
+    max-height: calc(100vh - 90px);
+  }
+
+  .moneycommandai-fab-tooltip {
+    font-size: 12px;
+    padding: 4px 20px;
+  }
+
+  /* Wider bubbles */
+  .moneycommandai-chat-msg__bubble {
+    max-width: 84%;
+  }
+
+  /* Comfortable tap targets */
+  .moneycommandai-chat-home__chip {
+    min-height: 40px;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .moneycommandai-quick-actions button {
+    min-height: 40px;
+    padding: 6px 16px;
+  }
+}
+
+/* ── Mobile JS class overrides (moneycommandai-layout-mobile) ───────────────
+   Applied when isMobile=true is confirmed in Chatbot.jsx. */
+.moneycommandai-layout-mobile .moneycommandai-fab-tooltip {
+  display: none !important;
+}
+
+.moneycommandai-layout-mobile .moneycommandai-fab-container {
+  right: 16px;
+  bottom: 16px;
+  gap: 0;
+}
+
+.moneycommandai-layout-mobile .moneycommandai-fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.moneycommandai-layout-mobile .moneycommandai-fab--open {
+  display: none !important;
+}
+
+.moneycommandai-layout-mobile .moneycommandai-chat-window {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform-origin: center;
+}
+
+/* Safe area insets for notches / home indicators */
+.moneycommandai-layout-mobile .moneycommandai-chat-header {
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  min-height: calc(64px + env(safe-area-inset-top, 0px));
+}
+
+.moneycommandai-layout-mobile .moneycommandai-chat-footer {
+  padding-bottom: calc(9px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Prevent auto-zoom on iOS when focusing input */
+.moneycommandai-layout-mobile .moneycommandai-chat-input {
+  font-size: 16px;
+  padding: 12px 14px;
+  min-height: 48px;
+}
+
+/* Touch-friendly input area */
+.moneycommandai-layout-mobile .moneycommandai-chat-input-area {
+  padding: 10px 12px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+}
+
+/* Wider message bubbles on small screens */
+.moneycommandai-layout-mobile .moneycommandai-chat-msg__bubble {
+  max-width: 88%;
+  font-size: 13px;
+}
+
+/* Comfortable tap targets for home chips on mobile */
+.moneycommandai-layout-mobile .moneycommandai-chat-home__chip {
+  min-height: 44px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* Full-width suggestion chips for easier tapping on mobile */
+.moneycommandai-layout-mobile .moneycommandai-suggestion-chip,
+.moneycommandai-layout-mobile .moneycommandai-chat-suggestion-chip {
+  width: 100%;
+  text-align: left;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+}
+
+/* Quick action tabs — touch-friendly height */
+.moneycommandai-layout-mobile .moneycommandai-quick-actions button {
+  min-height: 40px;
+  padding: 8px 14px;
+  touch-action: manipulation;
+}
+
+/* Send button touch target */
+.moneycommandai-layout-mobile .moneycommandai-chat-send {
+  width: 48px;
+  height: 48px;
+  touch-action: manipulation;
+}
+
+/* Home screen text scaling on very small phones */
+@media (max-width: 375px) {
+  .moneycommandai-layout-mobile .moneycommandai-chat-home__title {
+    font-size: 17px;
+  }
+  .moneycommandai-layout-mobile .moneycommandai-chat-home__sub {
+    font-size: 12px;
+  }
+  .moneycommandai-layout-mobile .moneycommandai-chat-home {
+    padding: 18px 14px;
+  }
+  .moneycommandai-layout-mobile .moneycommandai-chat-messages {
+    padding: 14px 10px;
+  }
+  .moneycommandai-layout-mobile .moneycommandai-chat-msg__bubble {
+    font-size: 12.5px;
+    padding: 10px 13px;
+  }
+}
+
+
+/* ── Bot Message Markdown Styles ─────────────────────────────── */
+
+.moneycommandai-msg-body {
+  width: 100%;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.6;
+  font-size: 12.5px;
+}
+
+/* Paragraphs spacing */
+.moneycommandai-msg-body p {
+  margin: 0 0 12px 0;
+  font-family: var(--moneycommandai-font);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--moneycommandai-text);
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.moneycommandai-msg-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings spacing and typography */
+.moneycommandai-msg-body h1,
+.moneycommandai-msg-body h2,
+.moneycommandai-msg-body h3,
+.moneycommandai-msg-body h4,
+.moneycommandai-msg-body h5,
+.moneycommandai-msg-body h6 {
+  font-family: var(--moneycommandai-font);
+  color: var(--moneycommandai-text);
+  margin: 16px 0 8px 0;
+  line-height: 1.35;
+  letter-spacing: 0.2px;
+}
+
+.moneycommandai-msg-body h1:first-child,
+.moneycommandai-msg-body h2:first-child,
+.moneycommandai-msg-body h3:first-child,
+.moneycommandai-msg-body h4:first-child {
+  margin-top: 0;
+}
+
+.moneycommandai-msg-body h1 {
+  font-size: 14.5px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--moneycommandai-border);
+  padding-bottom: 6px;
+}
+
+.moneycommandai-msg-body h2 {
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.moneycommandai-msg-body h3 {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--moneycommandai-blue);
+}
+
+/* Lists spacing and structure */
+.moneycommandai-msg-body ul {
+  margin: 8px 0;
+  padding-left: 22px;
+  list-style-type: disc;
+  display: block;
+}
+
+.moneycommandai-msg-body ol {
+  margin: 8px 0;
+  padding-left: 22px;
+  list-style-type: decimal;
+  display: block;
+}
+
+.moneycommandai-msg-body li {
+  display: list-item;
+  margin-bottom: 6px;
+  line-height: 1.6;
+  color: var(--moneycommandai-text);
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.moneycommandai-msg-body li:last-child {
+  margin-bottom: 0;
+}
+
+/* Inline paragraphs within lists */
+.moneycommandai-msg-body li p {
+  display: inline;
+  margin: 0;
+}
+
+/* Inline Code tags */
+.moneycommandai-msg-body :not(pre)>code {
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 12.5px;
+  background: var(--moneycommandai-blue-light);
+  color: var(--moneycommandai-blue-dark);
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--moneycommandai-blue-mid);
+  white-space: nowrap;
+}
+
+/* Code Blocks */
+.moneycommandai-msg-body pre {
+  background: var(--moneycommandai-surface2);
+  border: 1px solid var(--moneycommandai-border);
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 8px 0;
+}
+
+.moneycommandai-msg-body pre code {
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 12px;
+  color: var(--moneycommandai-text);
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+}
+
+/* Horizontal Rules */
+.moneycommandai-msg-body hr {
+  border: none;
+  border-top: 1px solid var(--moneycommandai-border);
+  margin: 10px 0;
+}
+
+/* Strong typography */
+.moneycommandai-msg-body strong {
+  font-weight: 600;
+  color: var(--moneycommandai-text);
+}
+
+
+
+/* ── Typing Animation ────────────────────────────────────────── */
+.moneycommandai-typing {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: fit-content;
+}
+
+.moneycommandai-typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--moneycommandai-blue);
+  animation: typingBounce 1.4s infinite;
+}
+
+.moneycommandai-typing span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.moneycommandai-typing span:nth-child(3) {
+  animation-delay: .4s;
+}
+
+@keyframes typingBounce {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: .4;
+  }
+
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+
+/* ── Suggestion buttons inside messages ─────────────────────── */
+.moneycommandai-msg-suggestions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.moneycommandai-msg-suggestions button {
+  border: 1.5px solid var(--moneycommandai-border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  background: var(--moneycommandai-white);
+  color: var(--moneycommandai-blue);
+  font-family: var(--moneycommandai-font);
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  text-align: left;
+}
+
+.moneycommandai-msg-suggestions button:hover {
+  background: var(--moneycommandai-blue);
+  border-color: var(--moneycommandai-blue);
+  color: #ffffff;
+}
+
+/* ── Citations / Sources Styling ───────────────────────────── */
+/* ── Citations / Sources Styling ───────────────────────────── */
+.moneycommandai-chat-citations {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--moneycommandai-border);
+  width: 100%;
+}
+
+.moneycommandai-chat-citations__title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--moneycommandai-text-muted);
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.moneycommandai-chat-citations__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.moneycommandai-chat-citation-link {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--moneycommandai-text);
+  background: var(--moneycommandai-bg);
+  border: 1px solid var(--moneycommandai-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.moneycommandai-chat-citation-link:hover {
+  background: var(--moneycommandai-white);
+  border-color: var(--moneycommandai-blue);
+  color: var(--moneycommandai-blue);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(29, 113, 184, 0.08);
+}
+
+/* ── Dynamic Follow-up Suggestions ─────────────────────────── */
+/* ── Dynamic Follow-up Suggestions ─────────────────────────── */
+.moneycommandai-chat-suggestions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  margin-left: 4px;
+  margin-bottom: 10px;
+  animation: moneycommandai-fadeup 0.35s ease;
+  width: calc(100% - 4px);
+}
+
+.moneycommandai-chat-suggestion-chip {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #163969;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-family: var(--moneycommandai-font);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #d2e4f7;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  line-height: 1.4;
+}
+
+.moneycommandai-chat-suggestion-chip:hover {
+  border-color: rgba(29, 113, 184, 0.85);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(29, 113, 184, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* ── Streaming Cursor / Animation ──────────────────────────── */
+.moneycommandai-chat-msg--streaming .moneycommandai-msg-body p:last-child::after {
+  content: "▊";
+  display: inline-block;
+  margin-left: 3px;
+  color: var(--moneycommandai-blue);
+  animation: moneycommandai-blink 0.8s step-end infinite;
+}
+
+@keyframes moneycommandai-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes moneycommandai-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes moneycommandai-gradient-shift-fab {
+  0% {
+    background-position: 0% 0%, 0% 50%;
+  }
+
+  50% {
+    background-position: 0% 0%, 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 0%, 0% 50%;
+  }
+}
+
+/* (mobile overrides consolidated into the main @media block above) */
+
+/* ============================================
+   Remove mobile tap/focus highlight
+   ============================================ */
+
+.moneycommandai-chat-window,
+.moneycommandai-chat-window * {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+}
+
+.moneycommandai-chat-window button,
+.moneycommandai-chat-window input,
+.moneycommandai-chat-window textarea,
+.moneycommandai-chat-window a {
+    appearance: none;
+    -webkit-appearance: none;
+
+    outline: none !important;
+    box-shadow: none !important;
+
+    -webkit-tap-highlight-color: transparent !important;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    touch-action: manipulation;
+}
+
+.moneycommandai-chat-window button:focus,
+.moneycommandai-chat-window button:focus-visible,
+.moneycommandai-chat-window button:active,
+.moneycommandai-chat-window input:focus,
+.moneycommandai-chat-window textarea:focus,
+.moneycommandai-chat-window a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+/* ── Live Support Suggestion Card ──────────────────────────────── */
+.moneycommandai-live-suggest-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.6rem 0.5rem 0.5rem;
+  padding: 0.9rem 1rem;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #0b1a30;
+  background-size: 200% 200%, 100% 100%, 100% 100%;
+  border: 1.5px solid rgba(29, 113, 184, 0.45);
+  border-radius: 14px;
+  animation: 
+    moneycommandai-suggest-in 0.35s cubic-bezier(0.34,1.56,0.64,1),
+    moneycommandai-header-shine 7s ease-in-out infinite;
+  pointer-events: all;
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.45), 
+    0 0 20px rgba(29, 113, 184, 0.25), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+@keyframes moneycommandai-suggest-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.moneycommandai-live-suggest-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.moneycommandai-live-suggest-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.moneycommandai-live-suggest-text strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.moneycommandai-live-suggest-text span {
+  font-size: 0.75rem;
+  color: #9bc5ec;
+  line-height: 1.4;
+}
+
+.moneycommandai-live-suggest-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.moneycommandai-live-suggest-btn {
+  border: none;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-family: var(--moneycommandai-font);
+}
+.moneycommandai-live-suggest-btn:hover { opacity: 0.9; transform: scale(1.03); }
+.moneycommandai-live-suggest-btn:active { transform: scale(0.98); }
+
+.moneycommandai-live-suggest-btn--yes {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #1D71B8;
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(29, 113, 184, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.moneycommandai-live-suggest-btn--yes:hover {
+  opacity: 1;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #2587db;
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 24px rgba(29, 113, 184, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.moneycommandai-live-suggest-btn--no {
+  background: rgba(255, 255, 255, 0.06);
+  color: #9bc5ec;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.moneycommandai-live-suggest-btn--no:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* ── Links & Citations Constant Light Blue Styling ───────────────── */
+.moneycommandai-chat-msg__bubble a {
+  color: #38bdf8 !important;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.moneycommandai-chat-msg__bubble a:hover {
+  color: #7dd3fc !important;
+  opacity: 0.95;
+}
+
+.moneycommandai-chat-citation-link {
+  color: #38bdf8 !important;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.moneycommandai-chat-citation-link:hover {
+  text-decoration: underline;
+  color: #7dd3fc !important;
+}
+

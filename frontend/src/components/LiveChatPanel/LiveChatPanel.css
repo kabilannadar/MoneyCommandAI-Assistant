@@ -1,0 +1,430 @@
+/* LiveChatPanel.css */
+
+/* ------------------------------------------------------------------ */
+/* Container                                                            */
+/* ------------------------------------------------------------------ */
+.lcp-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--moneycommandai-surface);
+  border-radius: var(--moneycommandai-radius);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/* Header Elements                                                      */
+/* ------------------------------------------------------------------ */
+.lcp-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lcp-header-end-btn {
+  background: transparent;
+  border: 1px solid rgba(250, 50, 10, 0.45);
+  color: var(--moneycommandai-red);
+  font-family: var(--moneycommandai-font);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+  outline: none;
+}
+
+.lcp-header-end-btn:hover {
+  background: rgba(250, 50, 10, 0.12);
+  color: #ff6040;
+  border-color: var(--moneycommandai-red);
+}
+
+/* ------------------------------------------------------------------ */
+/* Connecting & Queue Screen                                            */
+/* ------------------------------------------------------------------ */
+.lcp-queue-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.lcp-queue-card {
+  background: var(--moneycommandai-white);
+  border: 1px solid var(--moneycommandai-border);
+  border-radius: var(--moneycommandai-radius);
+  box-shadow: 0 10px 30px rgba(29, 113, 184, 0.08);
+  padding: 22px 24px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  min-height: 410px;
+  max-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  animation: moneycommandai-fadeup 0.4s ease;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Custom scrollbar for the queue card to match chatbot style */
+.lcp-queue-card::-webkit-scrollbar {
+  width: 6px;
+}
+.lcp-queue-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+.lcp-queue-card::-webkit-scrollbar-thumb {
+  background: var(--moneycommandai-border);
+  border-radius: 10px;
+}
+.lcp-queue-card::-webkit-scrollbar-thumb:hover {
+  background: var(--moneycommandai-text-muted);
+}
+
+.lcp-queue-pulse {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0px;
+}
+
+.lcp-queue-pulse span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--moneycommandai-blue);
+  animation: lcp-pulse-glow 1.4s ease-in-out infinite;
+}
+
+.lcp-queue-pulse span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.lcp-queue-pulse span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes lcp-pulse-glow {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.5;
+    background: var(--moneycommandai-blue-light);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    background: var(--moneycommandai-blue);
+    box-shadow: 0 0 10px var(--moneycommandai-blue);
+  }
+}
+
+.lcp-queue-title {
+  font-family: var(--moneycommandai-font);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--moneycommandai-text);
+  margin: 0;
+}
+
+.lcp-queue-badge {
+  background: var(--moneycommandai-blue-light);
+  color: var(--moneycommandai-blue-dark);
+  font-family: var(--moneycommandai-font);
+  font-size: 11.5px;
+  padding: 3.5px 10px;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.lcp-queue-text {
+  font-family: var(--moneycommandai-font);
+  font-size: 12px;
+  color: var(--moneycommandai-text-sub);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.lcp-queue-cancel {
+  background: transparent;
+  border: 1.5px solid var(--moneycommandai-border);
+  color: var(--moneycommandai-text-sub);
+  font-family: var(--moneycommandai-font);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.lcp-queue-cancel:hover {
+  background: var(--moneycommandai-surface2);
+  color: var(--moneycommandai-text);
+  border-color: var(--moneycommandai-text-muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* System Messages                                                      */
+/* ------------------------------------------------------------------ */
+.lcp-system-msg-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.lcp-system-msg {
+  font-family: var(--moneycommandai-font);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--moneycommandai-text-sub);
+  background: rgba(29, 113, 184, 0.07);
+  border: 1px solid rgba(29, 113, 184, 0.12);
+  border-radius: 30px;
+  padding: 5px 16px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* ------------------------------------------------------------------ */
+/* Ended State Footer                                                   */
+/* ------------------------------------------------------------------ */
+.lcp-ended-footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  background: var(--moneycommandai-white);
+  border-top: 1px solid var(--moneycommandai-border);
+}
+
+.lcp-done-btn {
+  background: linear-gradient(135deg, var(--moneycommandai-blue) 0%, var(--moneycommandai-blue-dark) 100%);
+  border: none;
+  color: white;
+  font-family: var(--moneycommandai-font);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(29, 113, 184, 0.35);
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 260px;
+}
+
+.lcp-done-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(29, 113, 184, 0.45);
+}
+
+/* ── Mobile Overrides (moneycommandai-layout-mobile) ─────────────────────── */
+.moneycommandai-layout-mobile .lcp-panel {
+  border-radius: 0 !important;
+}
+
+.moneycommandai-layout-mobile .lcp-queue-container {
+  padding: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.moneycommandai-layout-mobile .lcp-queue-card {
+  max-width: min(320px, 100%);
+  padding: 24px 18px;
+  gap: 14px;
+}
+
+.moneycommandai-layout-mobile .lcp-queue-title {
+  font-size: 14.5px;
+}
+
+/* Touch-friendly cancel button */
+.moneycommandai-layout-mobile .lcp-queue-cancel {
+  min-height: 48px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* Touch-friendly done button */
+.moneycommandai-layout-mobile .lcp-done-btn {
+  min-height: 48px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* End session button — bigger tap target */
+.moneycommandai-layout-mobile .lcp-header-end-btn {
+  min-height: 36px;
+  min-width: 80px;
+  font-size: 12px;
+  padding: 6px 12px;
+  touch-action: manipulation;
+}
+
+/* Ended footer — safe area aware */
+.moneycommandai-layout-mobile .lcp-ended-footer {
+  padding: 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+}
+
+/* ────────────────────────────────────────────────────────────────── */
+/* Wait Options for Support Queues                                    */
+/* ────────────────────────────────────────────────────────────────── */
+.lcp-wait-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
+  animation: moneycommandai-fadeup 0.4s ease;
+}
+
+.lcp-wait-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #163969;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #d2e4f7;
+  font-family: var(--moneycommandai-font);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.lcp-wait-btn:hover {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 50.1%),
+    #163969;
+  border-color: rgba(29, 113, 184, 0.6);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(29, 113, 184, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.lcp-wait-btn--primary {
+  border: 1.5px solid rgba(29, 113, 184, 0.6);
+  color: white;
+  box-shadow: 0 4px 12px rgba(29, 113, 184, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.lcp-wait-btn--primary:hover {
+  border-color: rgba(29, 113, 184, 0.9);
+  box-shadow: 0 8px 28px rgba(29, 113, 184, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.lcp-wait-message {
+  font-family: var(--moneycommandai-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: #065f46;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  line-height: 1.5;
+  margin-top: 5px;
+  animation: moneycommandai-fadeup 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* Final message note message box style */
+.lcp-textarea-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+}
+
+.lcp-textarea-field {
+  width: 100%;
+  height: 65px;
+  border-radius: 12px;
+  border: 1px solid var(--moneycommandai-border);
+  padding: 7px 9px;
+  font-family: var(--moneycommandai-font);
+  font-size: 11.5px;
+  color: var(--moneycommandai-text);
+  background: var(--moneycommandai-surface2);
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lcp-textarea-field:focus {
+  border-color: var(--moneycommandai-blue);
+  box-shadow: 0 0 0 3px rgba(29, 113, 184, 0.15);
+  background: var(--moneycommandai-white);
+}
+
+.lcp-textarea-submit-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--moneycommandai-text-sub);
+  opacity: 0.35;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.lcp-textarea-submit-btn--active {
+  color: var(--moneycommandai-blue);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.lcp-textarea-submit-btn--active:hover {
+  transform: translateY(-50%) scale(1.15);
+  color: var(--moneycommandai-blue-dark);
+}
+
+.lcp-textarea-submit-btn--active:active {
+  transform: translateY(-50%) scale(0.9);
+}

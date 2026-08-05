@@ -1,0 +1,66 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Local environment files (crucial for security)
+.env
+.env.local
+.env.*.local
+*.env
+backend/.env
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+backend/.venv/
+
+# Python cache & compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+backend/__pycache__/
+
+# Executables & binary files
+*.exe
+ngrok.exe
+
+# Testing files & directories (as requested)
+tests/
+backend/tests/
+Citations/
+suggestions/
+
+# Logs & temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build and production outputs
+dist/
+build/
+frontend/dist/
+
+# IDE / Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# SQLite Databases & Local Vector Store
+*.db
+*.sqlite3
+backend/moneycommandai_support.db
+backend/chroma_db/
+
+# Frontend config and environment
+frontend/src/components/Google Auth/
+frontend/.env
+
