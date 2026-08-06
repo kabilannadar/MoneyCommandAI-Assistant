@@ -27,6 +27,7 @@
   iframe.style.border = 'none';
   iframe.style.zIndex = '999999';
   iframe.style.background = 'transparent';
+  iframe.style.filter = 'drop-shadow(0 12px 30px rgba(0, 0, 0, 0.28)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.16))';
   iframe.style.transition = 'none'; // no geometry transitions — ever
   iframe.title = 'MoneyCommandAI Assistant';
   iframe.setAttribute('allow', 'autoplay');

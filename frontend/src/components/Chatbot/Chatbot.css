@@ -51,6 +51,15 @@ body.in-iframe {
   background: transparent;
 }
 
+/* Disable internal shadows when inside iframe to prevent clipping issues.
+   The parent page's widget wrapper will apply a composite drop-shadow filter to the iframe container. */
+.in-iframe .moneycommandai-chat-window,
+.in-iframe .moneycommandai-fab,
+.in-iframe .moneycommandai-fab-tooltip {
+  box-shadow: none !important;
+}
+
+
 /* When NOT in an iframe, still reset margin/padding */
 html:not(.in-iframe),
 body:not(.in-iframe) {
