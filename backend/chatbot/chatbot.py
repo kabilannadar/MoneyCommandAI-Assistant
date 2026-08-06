@@ -34,8 +34,6 @@ def format_history(history):
         })
     return formatted
 
-# Track prompt count in memory per session
-session_prompts = {}  # session_id -> count
 
 # ---------------------------------------------------------
 # Streaming SSE Generator
@@ -54,8 +52,6 @@ async def response_generator(
     ist = _tz(_td(hours=5, minutes=30))
     user_start_time = _dt.now(ist)
 
-    if session_id:
-        session_prompts[session_id] = session_prompts.get(session_id, 0) + 1
 
     # ---------------------------------------------------------
     # Safety & Exclusion Intercepts
@@ -103,47 +99,6 @@ async def response_generator(
         return
     else:
         logger.info(f"Cache MISS: no cached response for message preview '{message[:40]}'")
-
-    # ---------------------------------------------------------
-    # Heuristic Intercept for Working Hours / Operational Timings
-    # ---------------------------------------------------------
-    msg_lower = message.lower().strip()
-    is_hours_query = any(kw in msg_lower for kw in ["working hour", "office hour", "working time", "office time", "opening hour", "closing hour", "operation hour", "shift timing", "office timing", "work hour", "shift hour"]) or \
-                     (any(kw in msg_lower for kw in ["timing", "hour", "when"]) and any(kw in msg_lower for kw in ["open", "close", "work", "office"]))
-                     
-    if is_hours_query:
-        logger.info(f"Heuristic working hours intercept triggered for message: '{message}'")
-        reply = REPLIES["working_hours"]
-        
-        # Stream the response
-        for char in reply:
-            yield f"data: {json.dumps({'type': 'token', 'content': char})}\n\n"
-            await asyncio.sleep(0.002)
-            
-        yield f"data: {json.dumps({'type': 'suggestions', 'content': []})}\n\n"
-        yield f"data: {json.dumps({'type': 'citations', 'content': []})}\n\n"
-        yield "data: {\"type\": \"done\"}\n\n"
-        return
-
-    # ---------------------------------------------------------
-    # Heuristic Intercept for Price / Fees / Salary / Compensation
-    # ---------------------------------------------------------
-    is_price_salary_query = any(kw in msg_lower for kw in ["price", "pricing", "cost", "fee", "fees", "charge", "charges", "rate", "rates", "tuition", "subscription", "salary", "package", "pay", "compensation", "stipend", "ctc", "wage", "remuneration", "income", "payout", "earnings"]) or \
-                            (any(kw in msg_lower for kw in ["how much"]) and not any(kw in msg_lower for kw in ["time", "experience", "exp"]))
-                      
-    if is_price_salary_query:
-        logger.info(f"Heuristic pricing/salary intercept triggered for message: '{message}'")
-        reply = REPLIES["pricing_salary"]
-        
-        # Stream the response
-        for char in reply:
-            yield f"data: {json.dumps({'type': 'token', 'content': char})}\n\n"
-            await asyncio.sleep(0.002)
-            
-        yield f"data: {json.dumps({'type': 'suggestions', 'content': []})}\n\n"
-        yield f"data: {json.dumps({'type': 'citations', 'content': []})}\n\n"
-        yield "data: {\"type\": \"done\"}\n\n"
-        return
 
 
     # ── Recommended Flow Implementation ──────────────────────────────────────────
@@ -338,8 +293,6 @@ async def response_generator(
     yield f"data: {json.dumps({'type': 'suggestions', 'content': []})}\n\n"
     yield f"data: {json.dumps({'type': 'citations', 'content': citations})}\n\n"
 
-    if enable_live_support and session_id and session_prompts.get(session_id, 0) >= 3:
-        yield f"data: {json.dumps({'type': 'suggest_live_support'})}\n\n"
 
     yield "data: {\"type\": \"done\"}\n\n"
 

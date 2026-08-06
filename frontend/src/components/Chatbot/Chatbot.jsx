@@ -82,26 +82,36 @@ function ensureClickableLinks(text) {
   if (!text) return text;
   let formatted = text;
   
-  // 1. Convert plain email addresses (if not already inside [email](mailto:email))
+  // 1. Convert plain email addresses (if not already inside [text](mailto:email))
   formatted = formatted.replace(
-    /(?<!\]\()(mailto:)?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?!\))/g,
-    (match, prefix, email) => `[${email}](mailto:${email})`
+    /(\[[^\]]+\]\([^)]+\))|((?:mailto:)?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}))/g,
+    (match, p1, p2, email) => {
+      if (p1) return p1;
+      return `[${email}](mailto:${email})`;
+    }
   );
 
   // 2. Convert @handle (if not already inside [text](t.me/handle)) and ensure it's not part of an email address
   formatted = formatted.replace(
-    /(?<!\]\()(https:\/\/t\.me\/)?(?<![a-zA-Z0-9._%+-])@([a-zA-Z0-9_]{5,})(?!\))/g,
-    (match, prefix, handle) => `[@${handle}](https://t.me/${handle})`
+    /(\[[^\]]+\]\([^)]+\))|((?:https:\/\/t\.me\/)?(?<![a-zA-Z0-9._%+-])@([a-zA-Z0-9_]{5,}))/g,
+    (match, p1, p2, handle) => {
+      if (p1) return p1;
+      return `[@${handle}](https://t.me/${handle})`;
+    }
   );
 
   // 3. Convert plain URLs (if not already inside markdown links)
   formatted = formatted.replace(
-    /(?<!\]\()(https?:\/\/[^\s\)]+)(?!\))/g,
-    (match, url) => `[${url}](${url})`
+    /(\[[^\]]+\]\([^)]+\))|(https?:\/\/[^\s\)]+)/g,
+    (match, p1, url) => {
+      if (p1) return p1;
+      return `[${url}](${url})`;
+    }
   );
   
   return formatted;
 }
+
 
 function BotMessage({ text }) {
   const formattedText = ensureClickableLinks(text);
@@ -751,7 +761,7 @@ export default function Chatbot() {
             </div>
 
             <div className="moneycommandai-chat-footer">
-              Powered by <span className="moneycommandai-chat-footer__brand">R3X Labs</span>
+              Powered by <span className="moneycommandai-chat-footer__brand">ExpenseTracker</span>
             </div>
           </>
         )}

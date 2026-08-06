@@ -31,7 +31,7 @@ def detect_intent(question, has_context=False):
     if any(k in q_clean for k in logging_keywords):
         return "TELEGRAM_LOGGING"
 
-    # 4. ExpenseTracker general application features / capabilities
+    # 4. MoneyCommandAI general application features / capabilities
     feature_keywords = {
         "feature", "capability", "dashboard", "chart", "pie chart", "area chart",
         "budget", "income", "reminder", "goal", "recurring", "subscription", 

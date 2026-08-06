@@ -118,13 +118,13 @@ async def init_db():
                 hashed_pw = bcrypt.hashpw("Password123".encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
                 default_agent = SupportAgent(
                     name="Support Team Admin",
-                    email="admin@expensetracker.local",
+                    email="admin@moneycommandai.local",
                     password_hash=hashed_pw,
                     is_online=False
                 )
                 session.add(default_agent)
                 await session.commit()
-                logger.info("Default support agent seeded successfully (admin@expensetracker.local / Password123).")
+                logger.info("Default support agent seeded successfully (admin@moneycommandai.local / Password123).")
         except Exception as e:
             logger.error(f"Failed to seed default agent: {str(e)}")
 

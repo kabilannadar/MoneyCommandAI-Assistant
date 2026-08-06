@@ -1,7 +1,7 @@
 # data.py — Central knowledge base & metadata for the ExpenseTracker application.
 
 EXPENSE_TRACKER_INFO = {
-    "name": "ExpenseTracker",
+    "name": "MoneyCommandAI",
     "description": "A full-stack personal finance tracker built with FastAPI (backend) and React/Vite (frontend) that allows users to manage expenses, incomes, budgets, recurring transactions, goals, and reminders.",
     "tech_stack": {
         "frontend": "React 18, Vite, Vanilla CSS, React Query, React Router v6, Recharts",
@@ -36,9 +36,9 @@ V2_FEATURES = [
 ]
 
 TELEGRAM_SETUP_GUIDE = """
-To connect this chat or any Telegram account to your ExpenseTracker web account:
+To connect this chat or any Telegram account to your MoneyCommandAI web account:
 1. Open the Telegram Bot [**@expensetrackertnbot**](https://t.me/expensetrackertnbot) and send `/start`. It will print your unique numeric Chat ID (e.g., `123456789`).
-2. Log into the ExpenseTracker Web UI.
+2. Log into the MoneyCommandAI Web UI.
 3. Navigate to **Settings → Telegram Bot Setup** page.
 4. Paste your Chat ID into the input field and click **Link Telegram Account**.
 5. Once linked, the bot will notify you. You can start sending transaction logs instantly!
@@ -66,7 +66,7 @@ SUPPORT_CONTACT = {
 }
 
 # Redirect blocks for off-topic queries
-REDIRECT_BLOCK = f"""Outside scope, but here is ExpenseTracker! 😊
+REDIRECT_BLOCK = f"""Outside scope, but here is MoneyCommandAI! 😊
 - 🌐 Website: Visit your local dashboard [expensetrackertn.vercel.app](https://expensetrackertn.vercel.app/)
 - 🤖 Telegram Bot: Link via settings using your Chat ID (Bot: [{SUPPORT_CONTACT["bot_handle"]}](https://t.me/expensetrackertnbot))
 - ✉️ Support: Reach out to [{SUPPORT_CONTACT["email"]}](mailto:{SUPPORT_CONTACT["email"]})"""

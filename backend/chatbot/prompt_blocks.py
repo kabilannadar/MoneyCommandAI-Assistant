@@ -10,7 +10,7 @@ from chatbot.data import (
 )
 
 def _greeting_block():
-    return "\n\n## Greeting Instruction\n- Greet the user warmly, politely, and professionally. Offer assistance regarding ExpenseTracker features, dashboard guide, or Telegram bot setup details.\n"
+    return "\n\n## Greeting Instruction\n- Greet the user warmly, politely, and professionally. Offer assistance regarding MoneyCommandAI features, dashboard guide, or Telegram bot setup details.\n"
 
 def _telegram_setup_block():
     return f"""\n\n## Telegram Bot Connection Setup Guide
@@ -27,7 +27,7 @@ def _telegram_logging_block():
 def _app_features_block():
     v1_str = "\n".join([f"- {f}" for f in V1_FEATURES])
     v2_str = "\n".join([f"- {f}" for f in V2_FEATURES])
-    return f"""\n\n## ExpenseTracker Application Features
+    return f"""\n\n## MoneyCommandAI Application Features
 **V1 (Core Features):**
 {v1_str}
 
@@ -36,23 +36,32 @@ def _app_features_block():
 """
 
 def _support_contact_block():
-    return f"""\n\n## Customer Support Contact Details
+    return f"""\n\n## Customer Support Contact Details Instruction
+You must format your response for support/contact requests using this exact structure:
+### 🚀 Contact Support
+For assistance with MoneyCommandAI features, setup, or other queries, you can reach our support team through the following official channels:
+
+**Key Channels:**
 - ✉️ Email: [{SUPPORT_CONTACT["email"]}](mailto:{SUPPORT_CONTACT["email"]})
 - 🤖 Telegram Bot: [{SUPPORT_CONTACT["bot_handle"]}](https://t.me/expensetrackertnbot)
+- 💬 Live Chat: Use the chat interface to connect with a support agent.
+
+We will get back to you as soon as possible to resolve your issues!
 """
+
 
 def _decline_block(focus_name: str, selected_redirect: str) -> str:
     email = f"[{SUPPORT_CONTACT['email']}](mailto:{SUPPORT_CONTACT['email']})"
     bot = f"[{SUPPORT_CONTACT['bot_handle']}](https://t.me/expensetrackertnbot)"
     return f"""
 ## What to Decline
-**CRITICAL:** You are NOT a general-purpose AI. You are ONLY allowed to discuss the ExpenseTracker application. Do NOT answer questions about general knowledge, history, geography, science, other brands, or any topic unrelated to ExpenseTracker. If the query is not directly about ExpenseTracker's features, dashboard, spreadsheet exports, or Telegram bot setup/logging, you MUST politely decline and state that it is outside your scope. *(Exception: Short follow-up queries like "and", "more", "what else", "next" are valid continuations of the conversation; you must NOT decline them).*
+**CRITICAL:** You are NOT a general-purpose AI. You are ONLY allowed to discuss the MoneyCommandAI application. Do NOT answer questions about general knowledge, history, geography, science, other brands, or any topic unrelated to MoneyCommandAI. If the query is not directly about MoneyCommandAI's features, dashboard, spreadsheet exports, or Telegram bot setup/logging, you MUST politely decline and state that it is outside your scope. *(Exception: Short follow-up queries like "and", "more", "what else", "next" are valid continuations of the conversation; you must NOT decline them).*
 
 **CONDITIONAL REDIRECT RULE:**
 IF AND ONLY IF the user's query is completely off-topic and you are declining it, you must format your response using this structure:
-1. Write a single, brief sentence politely stating that you cannot answer the query because you only support the ExpenseTracker app. Do not copy the wording of this instruction.
-2. Write a single short transition sentence introducing ExpenseTracker features. Do not copy the wording of this instruction.
-3. List the following highlights about ExpenseTracker's {focus_name} (each on its own new line):
+1. Write a single, brief sentence politely stating that you cannot answer the query because you only support the MoneyCommandAI app. Do not copy the wording of this instruction.
+2. Write a single short transition sentence introducing MoneyCommandAI features. Do not copy the wording of this instruction.
+3. List the following highlights about MoneyCommandAI's {focus_name} (each on its own new line):
 {selected_redirect}
 4. List the following contact details (each on its own new line):
    - 🤖 Telegram Bot: {bot}
