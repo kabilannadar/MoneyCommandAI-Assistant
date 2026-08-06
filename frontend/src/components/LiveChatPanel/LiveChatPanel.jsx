@@ -325,7 +325,7 @@ export default function LiveChatPanel({ token, userId, userName, lastPreview, on
               />
             ) : (
               <img
-                src="https://ik.imagekit.io/alokabs/ALO_chatbot.png?updatedAt=1782552719576"
+                src="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721"
                 alt="MoneyCommandAI Support Logo"
                 style={{
                   width: "100%",
@@ -492,7 +492,7 @@ export default function LiveChatPanel({ token, userId, userName, lastPreview, on
                             />
                           ) : (
                             <img
-                              src="https://ik.imagekit.io/alokabs/ALO_chatbot.png?updatedAt=1782552719576"
+                              src="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721"
                               alt="MoneyCommandAI Support Logo"
                               style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
                             />
@@ -522,7 +522,7 @@ export default function LiveChatPanel({ token, userId, userName, lastPreview, on
                     />
                   ) : (
                     <img
-                      src="https://ik.imagekit.io/alokabs/ALO_chatbot.png?updatedAt=1782552719576"
+                      src="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721"
                       alt="MoneyCommandAI Support Logo"
                       style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
                     />
