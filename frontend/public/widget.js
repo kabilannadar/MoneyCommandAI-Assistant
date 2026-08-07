@@ -46,7 +46,7 @@
       iframe.style.bottom = 'auto';
     } else if (width <= 768) {
       // Tablet: medium window overlay — cap height to viewport
-      var tabletH = Math.min(780, height - 20);
+      var tabletH = Math.min(820, height - 20);
       iframe.style.width = '480px';
       iframe.style.height = tabletH + 'px';
       iframe.style.left = 'auto';
@@ -55,7 +55,7 @@
       iframe.style.bottom = '0px';
     } else if (width <= 1024) {
       // Small desktop: slightly compact window
-      var smDesktopH = Math.min(780, height - 20);
+      var smDesktopH = Math.min(820, height - 20);
       iframe.style.width = '460px';
       iframe.style.height = smDesktopH + 'px';
       iframe.style.left = 'auto';

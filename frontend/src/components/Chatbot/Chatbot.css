@@ -85,11 +85,11 @@ body:not(.in-iframe) {
 .moneycommandai-fab-container {
   position: fixed;
   right: 50px;
-  bottom: 50px;
+  bottom: 50px; /* reset to 50px */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
+  gap: 12px;
   z-index: 9999;
 }
 
@@ -337,12 +337,12 @@ body:not(.in-iframe) {
 .moneycommandai-chat-window {
   position: fixed;
   right: 50px;
-  /* 50px (FAB bottom) + 74px (FAB height) + 36px (comfortable gap) = 160px */
-  bottom: 160px;
+  /* 50px (FAB bottom) + 74px (FAB height) + 76px (large gap) = 200px */
+  bottom: 200px;
   width: 420px;
   max-width: calc(100vw - 32px);
   height: 600px;
-  max-height: calc(100vh - 180px);
+  max-height: calc(100vh - 220px);
   background: var(--moneycommandai-surface);
   border-radius: var(--moneycommandai-radius);
   display: flex;
@@ -1030,15 +1030,15 @@ body:not(.in-iframe) {
 @media (min-width: 461px) and (max-width: 500px) {
   .moneycommandai-fab-container {
     right: 30px;
-    bottom: 30px;
+    bottom: 50px; /* set to 50px (matching default layout) */
   }
 
   .moneycommandai-chat-window {
     right: 30px;
-    bottom: 140px;
+    bottom: 200px; /* set to 200px (matching default layout) */
     width: 420px;
-    height: 580px;
-    max-height: calc(100vh - 100px);
+    height: 600px;
+    max-height: calc(100vh - 220px); /* matching default layout */
   }
 
   .moneycommandai-fab-tooltip {
@@ -1070,15 +1070,15 @@ body:not(.in-iframe) {
 @media (min-width: 440px) and (max-width: 460px) {
   .moneycommandai-fab-container {
     right: 20px;
-    bottom: 20px;
+    bottom: 50px; /* set to 50px (matching default layout) */
   }
 
   .moneycommandai-chat-window {
     right: 20px;
-    bottom: 130px;
+    bottom: 200px; /* set to 200px (matching default layout) */
     width: 420px;
-    height: 560px;
-    max-height: calc(100vh - 90px);
+    height: 600px;
+    max-height: calc(100vh - 220px); /* matching default layout */
   }
 
   .moneycommandai-fab-tooltip {

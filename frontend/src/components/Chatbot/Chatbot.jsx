@@ -126,7 +126,7 @@ function BotMessage({ text }) {
 
 const BOT_AVATAR = (
   <img
-    src="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721"
+    src="/chatbot_mascot.png"
     alt="MoneyCommandAI Assistant"
     style={{
       width: "30px",
@@ -143,7 +143,7 @@ const MoneyCommandAILogo = () => (
     <clipPath id="logoCircle">
       <circle cx="24" cy="24" r="24" />
     </clipPath>
-    <image href="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721" width="48" height="48" clipPath="url(#logoCircle)" />
+    <image href="/chatbot_mascot.png" width="48" height="48" clipPath="url(#logoCircle)" />
   </svg>
 );
 
@@ -576,7 +576,7 @@ export default function Chatbot() {
               <div className="moneycommandai-chat-header__brand">
                 <div className="moneycommandai-chat-header__logo">
                   <img
-                    src="https://ik.imagekit.io/kabi10/MoneyCommandAI_Chatbot_Avatar.png?updatedAt=1785936402721"
+                    src="/chatbot_mascot.png"
                     alt="MoneyCommandAI Assistant Logo"
                     style={{
                       width: "100%",
