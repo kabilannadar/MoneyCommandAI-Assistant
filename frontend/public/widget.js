@@ -1,4 +1,9 @@
 (function () {
+  // 0. Single-instance guard — if an iframe already exists, do nothing.
+  //    This handles React StrictMode double-mount where cleanup runs
+  //    BEFORE the second mount, clearing any window-level flags.
+  if (document.querySelector('iframe[title="MoneyCommandAI Assistant"]')) return;
+
   // 1. Determine the chatbot host URL from this script's src attribute
   var scriptEl = document.currentScript || (function () {
     var scripts = document.getElementsByTagName('script');
