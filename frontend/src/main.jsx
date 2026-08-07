@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { Analytics } from '@vercel/analytics/react'
 
 if (window.self !== window.top) {
   document.documentElement.classList.add('in-iframe');
@@ -20,6 +21,7 @@ if (path.startsWith('/admin')) {
       <StrictMode>
         <Suspense fallback={<div style={{ padding: '2rem', fontFamily: 'Inter,sans-serif' }}>Loading...</div>}>
           <AdminPanel />
+          <Analytics />
         </Suspense>
       </StrictMode>
     );
@@ -28,6 +30,7 @@ if (path.startsWith('/admin')) {
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <App />
+      <Analytics />
     </StrictMode>,
   );
 }
