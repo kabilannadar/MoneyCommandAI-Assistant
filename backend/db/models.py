@@ -146,3 +146,20 @@ class AppSetting(Base):
     key   = Column(String(100), primary_key=True, index=True)
     value = Column(String(500), nullable=False)
 
+
+class AgentNote(Base):
+    __tablename__ = "agent_notes"
+
+    id            = Column(Integer, primary_key=True, index=True)
+    user_id       = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    agent_id      = Column(Integer, ForeignKey("support_agents.id", ondelete="CASCADE"), nullable=False)
+    session_id    = Column(Integer, ForeignKey("chat_sessions.id", ondelete="SET NULL"), nullable=True)
+    content       = Column(Text, nullable=False)
+    is_shared     = Column(Boolean, default=False)
+    created_at    = Column(DateTime, default=get_ist_time_naive)
+
+    # Relationships
+    user          = relationship("User")
+    agent         = relationship("SupportAgent")
+
+
