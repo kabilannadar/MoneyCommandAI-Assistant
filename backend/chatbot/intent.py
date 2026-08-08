@@ -36,7 +36,9 @@ def detect_intent(question, has_context=False):
         "feature", "capability", "dashboard", "chart", "pie chart", "area chart",
         "budget", "income", "reminder", "goal", "recurring", "subscription", 
         "audit log", "profile", "export", "csv", "excel", "sheet", 
-        "currency", "dark mode"
+        "currency", "dark mode", "payment", "payment method", "payment mode",
+        "payment modes", "payment methods", "mode of payment", "cash", "upi",
+        "card", "wallet", "netbanking"
     }
     if any(k in q_clean for k in feature_keywords):
         return "APP_FEATURES"

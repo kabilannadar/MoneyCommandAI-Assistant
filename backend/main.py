@@ -7,6 +7,7 @@ import socketio
 import os
 import sys
 import time
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 from utils.logger import logger
 
@@ -382,6 +383,17 @@ def chat(req: ChatRequest, request: Request):
         ),
         media_type="text/event-stream"
     )
+
+@app.get("/health", tags=["Health"])
+@app.head("/health", tags=["Health"])
+@app.get("/api/health", tags=["Health"])
+@app.head("/api/health", tags=["Health"])
+def health_check():
+    return {
+        "status": "healthy",
+        "service": "MoneyCommandAI Backend",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
 
 # Serve static files from the frontend build directory
 frontend_dist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")

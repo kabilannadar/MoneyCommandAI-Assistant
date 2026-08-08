@@ -15,7 +15,20 @@ DEFAULT_CATEGORIES = {
     "income": ["Salary", "Freelancing", "Gifts", "Other"]
 }
 
-SUPPORTED_PAYMENT_METHODS = ["upi", "cash", "card", "bank", "netbanking", "wallet", "online", "cheque"]
+SUPPORTED_PAYMENT_METHODS = ["upi", "cash", "card", "netbanking", "wallet", "other", "cheque"]
+
+PAYMENT_MODES_GUIDE = """
+MoneyCommandAI allows you to categorize transactions using the following payment modes:
+- 💻 **UPI** (Default mode for instant digital payments via GPay, PhonePe, Paytm, etc.)
+- 💵 **Cash** (Physical cash payments)
+- 💳 **Card** (Debit or Credit card payments)
+- 🏦 **Net Banking / Bank Transfer** (Online banking, NEFT, IMPS, RTGS)
+- 👛 **Wallet** (Digital wallet balances)
+- 📄 **Cheque / Other** (Cheque and other custom methods)
+
+🔒 **Important Note**:
+Payment modes are simply labels/tags to categorize how money was spent or received. MoneyCommandAI NEVER asks for, stores, or requires sensitive card numbers, CVVs, PINs, or bank account numbers.
+"""
 
 V1_FEATURES = [
     "JWT Authentication — Secure sign-up, login, and profile management.",

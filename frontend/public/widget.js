@@ -196,12 +196,14 @@
     postResizeMessage();
   });
 
-  // 5. Listen for toggle messages from inside the iframe to track open/closed state
+  // 5. Listen for toggle and log messages from inside the iframe
   window.addEventListener('message', function (event) {
     if (event.origin !== chatbotUrl) return;
 
     var data = event.data;
-    if (data && data.type === 'moneycommandai-chatbot-toggle') {
+    if (!data) return;
+
+    if (data.type === 'moneycommandai-chatbot-toggle') {
       isOpen = !!data.open;
       if (isOpen) {
         iframe.style.pointerEvents = 'auto';
@@ -213,6 +215,51 @@
         // the host page content.
         iframe.style.pointerEvents = isOverFabRegion(lastCursorX, lastCursorY) ? 'auto' : 'none';
       }
+    } else if (data.type === 'moneycommandai-log-transaction') {
+      var text = data.text;
+      var token = localStorage.getItem('token');
+      var apiBase = window.location.origin;
+
+      fetch(apiBase + '/api/telegram/log-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? 'Bearer ' + token : ''
+        },
+        body: JSON.stringify({ text: text })
+      })
+      .then(function (res) {
+        if (!res.ok) {
+          if (res.status === 401) {
+            throw new Error('Authentication required. Please make sure you are logged in.');
+          }
+          return res.json().then(function (err) {
+            throw new Error(err.detail || 'HTTP Error ' + res.status);
+          }).catch(function () {
+            throw new Error('HTTP Error ' + res.status);
+          });
+        }
+        return res.json();
+      })
+      .then(function (json) {
+        // Send response back to the iframe
+        iframe.contentWindow.postMessage({
+          type: 'moneycommandai-log-transaction-response',
+          response: json
+        }, chatbotUrl);
+
+        // If logged successfully, dispatch custom event in parent to trigger React Query invalidation
+        if (json.status === 'success') {
+          window.dispatchEvent(new CustomEvent('moneycommandai-transaction-logged', { detail: json }));
+        }
+      })
+      .catch(function (err) {
+        console.error('[widget.js] Logging failed:', err);
+        iframe.contentWindow.postMessage({
+          type: 'moneycommandai-log-transaction-response',
+          response: { status: 'error', message: err.message || 'Connection failed.' }
+        }, chatbotUrl);
+      });
     }
   });
 })();

@@ -2,6 +2,7 @@ from chatbot.data import (
     EXPENSE_TRACKER_INFO,
     DEFAULT_CATEGORIES,
     SUPPORTED_PAYMENT_METHODS,
+    PAYMENT_MODES_GUIDE,
     V1_FEATURES,
     V2_FEATURES,
     TELEGRAM_SETUP_GUIDE,
@@ -22,6 +23,8 @@ def _telegram_logging_block():
 {TELEGRAM_LOGGING_SYNTAX}
 - Default Categories: {DEFAULT_CATEGORIES}
 - Supported Payment Methods: {SUPPORTED_PAYMENT_METHODS}
+
+{PAYMENT_MODES_GUIDE}
 """
 
 def _app_features_block():
@@ -33,6 +36,9 @@ def _app_features_block():
 
 **V2 (Extended Features):**
 {v2_str}
+
+## Supported Payment Modes in MoneyCommandAI
+{PAYMENT_MODES_GUIDE}
 """
 
 def _support_contact_block():

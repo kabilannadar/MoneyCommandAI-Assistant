@@ -149,6 +149,19 @@ const MoneyCommandAILogo = () => (
 
 
 
+const isLoggingPattern = (text) => {
+  const lower = text.trim().toLowerCase();
+  // Starts with logging command keyword
+  if (/^(income|inc|emi|debt|loan|goal|sub|subscription|remind|reminder|cat|category|budget|recurring|recur|repeat)\b/.test(lower)) {
+    return true;
+  }
+  // Or contains numbers (likely an expense command like "coffee 80 cash")
+  if (/\d+/.test(lower)) {
+    return true;
+  }
+  return false;
+};
+
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   // true when the closed-state FAB (full size + tooltip) is ready to show.
@@ -374,20 +387,73 @@ export default function Chatbot() {
       })
     };
 
-    // 2. Build history payload for the backend (excluding the current user message)
-    const historyPayload = messages
-      .filter((msg) => msg.sender === "user" || msg.sender === "bot")
-      .map((msg) => ({
-        role: msg.sender === "user" ? "user" : "assistant",
-        content: msg.text
-      }));
-
     setLastUserMsg(trimmed);
     setShowLiveSuggest(false);
 
     setMessages((prev) => [...prev, userMsg]);
     setMessage("");
     setIsTyping(true);
+
+    // If matching logging pattern, try local parsing & saving first
+    if (isLoggingPattern(trimmed)) {
+      try {
+        const logResult = await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            window.removeEventListener('message', handleLogMessage);
+            reject(new Error('Transaction logging request timed out.'));
+          }, 8000);
+
+          function handleLogMessage(event) {
+            if (event.data && event.data.type === 'moneycommandai-log-transaction-response') {
+              clearTimeout(timeout);
+              window.removeEventListener('message', handleLogMessage);
+              resolve(event.data.response);
+            }
+          }
+
+          window.addEventListener('message', handleLogMessage);
+          window.parent.postMessage({ type: 'moneycommandai-log-transaction', text: trimmed }, '*');
+        });
+
+        if (logResult.status === 'success') {
+          setIsTyping(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now() + 1,
+              sender: "bot",
+              text: logResult.message,
+              time: new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+              }),
+              citations: [],
+              suggestions: []
+            }
+          ]);
+          return;
+        } else if (logResult.status === 'error') {
+          setIsTyping(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now() + 1,
+              sender: "bot",
+              text: `⚠️ **Logging Failed:** ${logResult.message}`,
+              time: new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+              }),
+              citations: [],
+              suggestions: []
+            }
+          ]);
+          return;
+        }
+      } catch (err) {
+        console.warn('[Chatbot] Intercept failed or timed out. Falling back to LLM:', err);
+      }
+    }
 
     const localTimeStr = new Date().toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -403,8 +469,17 @@ export default function Chatbot() {
       day: 'numeric'
     });
 
+    // Build history payload for the backend (excluding the current user message)
+    const historyPayload = messages
+      .filter((msg) => msg.sender === "user" || msg.sender === "bot")
+      .map((msg) => ({
+        role: msg.sender === "user" ? "user" : "assistant",
+        content: msg.text
+      }));
+
     try {
       const response = await fetch(`${API_BASE}/chat`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
