@@ -218,7 +218,10 @@
     } else if (data.type === 'moneycommandai-log-transaction') {
       var text = data.text;
       var token = localStorage.getItem('token');
-      var apiBase = window.location.origin;
+      var apiBase = (window.__EXPENSE_TRACKER_API_URL__ || 
+                     (document.currentScript && document.currentScript.getAttribute('data-api-base')) || 
+                     (window.location.hostname.includes('vercel.app') ? 'https://expensetracker-ke0e.onrender.com' : window.location.origin)
+                    ).replace(/\/$/, '');
 
       fetch(apiBase + '/api/telegram/log-text', {
         method: 'POST',
