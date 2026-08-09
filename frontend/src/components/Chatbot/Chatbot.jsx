@@ -36,7 +36,7 @@ function getSuggestions(text) {
   return [
     "Telegram Bot Setup",
     "App Features",
-    "Live Chat Support"
+    "Support & Feedback"
   ];
 }
 
@@ -694,7 +694,7 @@ export default function Chatbot() {
                 <div className="moneycommandai-chat-home">
                   <div className="moneycommandai-chat-home__text">
                     <h2 className="moneycommandai-chat-home__title">Hello! I'm MoneyCommandAI Assistant</h2>
-                    <p className="moneycommandai-chat-home__sub">Ask me anything about ExpenseTracker features, dashboard guides, Telegram bot setup, or connect with our support agents.</p>
+                    <p className="moneycommandai-chat-home__sub">Ask me anything about ExpenseTracker features, dashboard guides, Telegram bot setup, or how to contact our support team.</p>
                   </div>
                   <div className="moneycommandai-chat-home__chips">
                     {["Telegram Bot Setup", "App Features", "Contact Support"].map((chip) => (
