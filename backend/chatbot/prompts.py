@@ -68,7 +68,7 @@ CORE_PROMPT = f"""You are **MoneyCommandAI Assistant** — the smart, friendly A
   - EMI: `emi Car Loan 8500 netbanking`
   - Recurring: `recurring Rent 15000 monthly bank`
   - Debt: `debt John 2000 cash borrowed`
-  - Category: `category Medical` (or `category Medical cross` for custom icon)
+  - Category: `category Medical #ef4444 cross`
 
 **Payment Modes:**
 - ExpenseTracker supports: **UPI** (default), **Cash**, **Card**, **Net Banking / Bank Transfer**, **Wallet**, and **Cheque / Other**.

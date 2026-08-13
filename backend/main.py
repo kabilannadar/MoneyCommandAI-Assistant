@@ -389,11 +389,7 @@ def chat(req: ChatRequest, request: Request):
 @app.get("/api/health", tags=["Health"])
 @app.head("/api/health", tags=["Health"])
 def health_check():
-    return {
-        "status": "healthy",
-        "service": "MoneyCommandAI Backend",
-        "timestamp": datetime.now(timezone.utc).isoformat()
-    }
+    return {"status": "ok"}
 
 # Serve static files from the frontend build directory
 frontend_dist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
@@ -408,7 +404,7 @@ else:
 async def spa_fallback_handler(request: Request, exc):
     is_api_path = any(
         request.url.path.startswith(p)
-        for p in ("/api/", "/auth/", "/agent/", "/admin/", "/chat")
+        for p in ("/api/", "/auth/", "/agent/", "/admin/", "/chat", "/health")
     )
     if request.method == "GET" and not is_api_path:
         index_path = os.path.join(frontend_dist_dir, "index.html")
