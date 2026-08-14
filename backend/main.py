@@ -388,7 +388,7 @@ def chat(req: ChatRequest, request: Request):
 @app.head("/health", tags=["Health"])
 @app.get("/api/health", tags=["Health"])
 @app.head("/api/health", tags=["Health"])
-def health_check():
+async def health_check():
     return {"status": "ok"}
 
 # Serve static files from the frontend build directory
