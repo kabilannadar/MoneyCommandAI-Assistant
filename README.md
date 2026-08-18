@@ -646,7 +646,7 @@ This project is proprietary software. All rights reserved.
 
   <h3>MoneyCommandAI Assistant</h3>
 
-  <p>Built with ❤️ for <a href="https://expensetrackertn.vercel.app"><strong>ExpenseTracker</strong></a></p>
+  <p>Powered by <a href="https://expensetrackertn.vercel.app"><strong>ExpenseTracker</strong></a></p>
 
   <p>
     <a href="https://expensetrackertn.vercel.app">🌐 Live App</a>
@@ -655,7 +655,7 @@ This project is proprietary software. All rights reserved.
     &nbsp;•&nbsp;
     <a href="https://t.me/expensetrackertnbot">🤖 Telegram Bot</a>
     &nbsp;•&nbsp;
-    <a href="mailto:support@moneycommandai.in">✉️ Email Us</a>
+    <a href="mailto:r.r.kabilan0335@gmail.com">✉️ Email Us</a>
   </p>
 
   <p>
@@ -668,6 +668,6 @@ This project is proprietary software. All rights reserved.
     </a>
   </p>
 
-  <sub>© 2026 MoneyCommandAI. All rights reserved.</sub>
+<sub>© 2026 MoneyCommandAI. All rights reserved.</sub>
 
 </div>
