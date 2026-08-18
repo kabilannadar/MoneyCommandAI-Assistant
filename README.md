@@ -658,16 +658,6 @@ This project is proprietary software. All rights reserved.
     <a href="mailto:r.r.kabilan0335@gmail.com">✉️ Email Us</a>
   </p>
 
-  <p>
-    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant">
-      <img src="https://img.shields.io/github/stars/kabilannadar/MoneyCommandAI-Assistant?style=social" alt="GitHub Stars" />
-    </a>
-    &nbsp;
-    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/fork">
-      <img src="https://img.shields.io/github/forks/kabilannadar/MoneyCommandAI-Assistant?style=social" alt="GitHub Forks" />
-    </a>
-  </p>
-
 <sub>© 2026 MoneyCommandAI. All rights reserved.</sub>
 
 </div>
