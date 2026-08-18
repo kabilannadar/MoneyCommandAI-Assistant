@@ -1,147 +1,86 @@
-<div align="center">
+# 📂 MoneyCommandAI Assistant
 
+<p align="center">
   <img src="https://raw.githubusercontent.com/kabilannadar/MoneyCommandAI-Assistant/main/frontend/public/MoneyCommandAI_Chatbot_Banner.png" alt="MoneyCommandAI Assistant Banner" width="100%" />
+</p>
 
-  <h1>MoneyCommandAI Assistant</h1>
+<h3 align="center">MoneyCommandAI Assistant</h3>
+<p align="center">
+  <strong>The smart AI support layer embedded inside <a href="https://expensetrackertn.vercel.app">ExpenseTracker</a> — helping users master their personal finances via natural language chat.</strong>
+</p>
 
-  <p><strong>The smart AI support layer embedded inside <a href="https://expensetrackertn.vercel.app">ExpenseTracker</a> — helping users master their personal finances via natural language chat.</strong></p>
+<p align="center">
+  <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square" alt="License" />
+  </a>
+  <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/kabilannadar/MoneyCommandAI-Assistant/keep_alive.yml?label=keep-alive&style=flat-square" alt="Keep Alive" />
+  </a>
+  <img src="https://img.shields.io/badge/python-3.11-blue?style=flat-square&logo=python" alt="Python 3.11" />
+  <img src="https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React 19" />
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite" alt="Vite 8" />
+  <img src="https://img.shields.io/badge/LLM-Groq-FF6B00?style=flat-square" alt="Groq LLM" />
+</p>
 
-  <!-- Badges -->
-  <p>
-    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/blob/main/LICENSE">
-      <img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square" alt="License" />
-    </a>
-    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/actions">
-      <img src="https://img.shields.io/github/actions/workflow/status/kabilannadar/MoneyCommandAI-Assistant/keep_alive.yml?label=keep-alive&style=flat-square" alt="Keep Alive" />
-    </a>
-    <img src="https://img.shields.io/badge/python-3.11-blue?style=flat-square&logo=python" alt="Python 3.11" />
-    <img src="https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi" alt="FastAPI" />
-    <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React 19" />
-    <img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite" alt="Vite 8" />
-    <img src="https://img.shields.io/badge/LLM-Groq-FF6B00?style=flat-square" alt="Groq LLM" />
-    <img src="https://img.shields.io/badge/Vector_DB-ChromaDB-6C3483?style=flat-square" alt="ChromaDB" />
-    <img src="https://img.shields.io/badge/Socket.IO-realtime-010101?style=flat-square&logo=socket.io" alt="Socket.IO" />
-    <img src="https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker" alt="Docker" />
-  </p>
-
-  <!-- Quick Links -->
-  <p>
-    <a href="https://expensetrackertn.vercel.app"><strong>🌐 Live App</strong></a>
-    &nbsp;•&nbsp;
-    <a href="https://expensetrackertn.vercel.app/support"><strong>💬 Support & Feedback</strong></a>
-    &nbsp;•&nbsp;
-    <a href="https://t.me/expensetrackertnbot"><strong>🤖 Telegram Bot</strong></a>
-    &nbsp;•&nbsp;
-    <a href="#getting-started"><strong>🚀 Get Started</strong></a>
-    &nbsp;•&nbsp;
-    <a href="#api-reference"><strong>📖 API Docs</strong></a>
-  </p>
-
-</div>
+<p align="center">
+  <a href="https://expensetrackertn.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live_Website-Visit_ExpenseTracker-b05f30?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Website" />
+  </a>
+</p>
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Tech Stack](#️-tech-stack)
+- [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
   - [Running Locally](#running-locally)
-- [Environment Variables](#environment-variables)
-- [API Reference](#api-reference)
-- [Embeddable Widget](#embeddable-widget)
-- [Admin Panel](#admin-panel)
-- [Agent Dashboard](#agent-dashboard)
-- [Live Support System](#live-support-system)
-- [RAG (Retrieval-Augmented Generation)](#rag-retrieval-augmented-generation)
-- [Docker Deployment](#docker-deployment)
-- [CI/CD — Keep Alive Workflow](#cicd--keep-alive-workflow)
-- [Security](#security)
-- [Contributing](#contributing)
-- [License](#license)
+- [Environment Variables](#️-environment-variables)
+- [API Reference](#-api-reference)
+- [Embeddable Widget](#-embeddable-widget)
+- [Admin Panel & Agent Dashboard](#️-admin-panel--agent-dashboard)
+- [Live Support System](#-live-support-system)
+- [RAG (Retrieval-Augmented Generation)](#-rag-retrieval-augmented-generation)
+- [Docker Deployment](#-docker-deployment)
+- [CI/CD — Keep Alive Workflow](#-cicd--keep-alive-workflow)
+- [Security & Content Safety](#-security--content-safety)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Contact & Connect](#-contact--connect)
 
 ---
 
-## Overview
+## 📖 Overview
 
 **MoneyCommandAI Assistant** is a production-grade, full-stack AI chatbot application built to serve as the intelligent support layer for the ExpenseTracker personal finance platform. It helps users understand app features, set up Telegram bot logging, manage budgets/goals/reminders, and escalate to live human agents when needed.
 
 The system is composed of:
-
 - A **FastAPI** backend with streaming SSE responses, Socket.IO real-time communication, JWT authentication, and a SQLite/PostgreSQL database.
 - A **React** (Vite) frontend that renders the chat interface, an agent dashboard, and an admin panel.
 - An **embeddable JavaScript widget** (`widget.js`) that injects the chatbot into any third-party webpage via a single `<script>` tag.
 
 ---
 
-## Features
+## 🚀 Key Features
 
-### 🤖 AI Chatbot
-
-- Powered by **Groq LLM** (fast inference) with a carefully engineered system prompt.
-- **Intent detection** classifies user queries into categories (`GREETING`, `TELEGRAM_SETUP`, `TELEGRAM_LOGGING`, `APP_FEATURES`, `SUPPORT_CONTACT`) to inject the most relevant context into the prompt.
-- **Response streaming** via Server-Sent Events (SSE) for a smooth, real-time typing effect.
-- **Conversation cache** avoids redundant LLM calls for repeated identical queries.
-- **Follow-up suggestions** are generated alongside each response.
-- **Citation streaming** — sources from web search are returned alongside answers.
-
-### 🔍 RAG (Retrieval-Augmented Generation)
-
-- Optional semantic knowledge base powered by **ChromaDB** and **Hugging Face** embeddings (`all-MiniLM-L6-v2`).
-- When enabled (`ENABLE_RAG=true`), relevant help documents are retrieved and injected into the LLM context, reducing hallucinations.
-- Falls back gracefully if RAG is unavailable.
-
-### 🌐 Web Search Fallback
-
-- If the local RAG knowledge base does not have enough context, the chatbot can optionally perform a **DuckDuckGo web search** (`ddgs`) scoped to finance-related topics.
-- Search is gated by a topic-scope check so it only fires for relevant queries.
-
-### 🔒 Safety Filters
-
-- **Vulgar content detection** blocks offensive input before it reaches the LLM.
-- **Negative sentiment detection** triggers an empathetic response flow rather than escalating abusive messages.
-
-### 💬 Live Human Support
-
-- Real-time user to agent messaging over **Socket.IO**.
-- Users can request to escalate from AI chat to a live human agent.
-- A **waiting queue** is maintained and broadcast to all connected agents.
-- Agents can claim, chat with, and resolve sessions from the Agent Dashboard.
-- Stale "waiting" sessions are automatically resolved on server restart.
-- Reliable page-unload cleanup via `navigator.sendBeacon` to the `/api/live/cancel-queue` endpoint.
-
-### 👤 Authentication
-
-- **Google Sign-In** (OAuth 2.0 via `@react-oauth/google`) for end users.
-- **Phone-based login** for users.
-- **JWT-based** session management for users, support agents, and admins.
-
-### 🛡️ Rate Limiting
-
-- Chat endpoint: **30 requests / 60 seconds** per IP.
-- Auth endpoints (`/auth/phone-login`, `/agent/login`, `/admin/login`): **5 attempts / 10 minutes** per IP.
-
-### ⚙️ Admin Panel
-
-- Manage support agents (create, update, delete).
-- Configure dynamic settings (enable/disable RAG, live support, session persistence) that take effect without a server restart.
-- View and manage registered users.
-
-### 🔌 Embeddable Widget
-
-- Drop-in `<script>` tag that injects an iframe-based chatbot into any website.
-- Responsive across mobile (fullscreen), tablet, and desktop.
-- Auto-resizes and communicates with the parent page via `postMessage`.
+- **🤖 AI Chatbot Engine:** Powered by Groq LLM with intent detection (`GREETING`, `TELEGRAM_SETUP`, `TELEGRAM_LOGGING`, `APP_FEATURES`, `SUPPORT_CONTACT`) to inject context, response streaming via Server-Sent Events (SSE), and fallback DuckDuckGo web search.
+- **🔍 Retrieval-Augmented Generation (RAG):** Semantic knowledge base querying powered by ChromaDB and Hugging Face embeddings (`all-MiniLM-L6-v2`) with a graceful fallback system.
+- **💬 Live Support Escalation:** Real-time user-to-agent WebSocket messaging via Socket.IO, active queue broadcasting, and agent claiming dashboard with automatic stale session cleanup.
+- **🔒 Safety & Rate Limiting:** Vulgar/offensive content blocks, negative sentiment detection, JWT auth (Google OAuth 2.0 / Phone), and strict per-IP rate limits for chat and auth endpoints.
+- **⚙️ Dynamic Admin controls:** Create/manage agents, configure live flags (RAG, live support, session persistence) dynamically without requiring a server restart.
+- **🔌 Embeddable Chat Widget:** Iframe-based drop-in JS widget that is responsive, handles dynamic resizing, and initializes communication via `postMessage`.
 
 ---
 
-## Architecture
+## 📐 Architecture
 
 ```
 +-------------------------------------------------------------+
@@ -174,75 +113,80 @@ The system is composed of:
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
-```
-MoneyCommandAI/
-|-- backend/
-|   |-- auth/                    # Authentication routers
-|   |   |-- auth.py              # User auth (Google OAuth, phone login)
-|   |   |-- agent_auth.py        # Support agent login/auth
-|   |   |-- admin_auth.py        # Admin login/auth
-|   |   |-- admin_agents.py      # Agent management APIs
-|   |   |-- admin_config.py      # Dynamic config settings APIs
-|   |   `-- admin_users.py       # User management APIs
-|   |-- chatbot/
-|   |   |-- chatbot.py           # Core streaming response generator
-|   |   |-- intent.py            # Query intent classifier
-|   |   |-- prompts.py           # System prompt builder (intent-aware)
-|   |   |-- prompt_blocks.py     # Modular prompt block components
-|   |   |-- data.py              # Static knowledge data
-|   |   |-- cache.py             # In-memory response cache
-|   |   |-- security.py          # Vulgar/negative content filters
-|   |   |-- responses.py         # Standard blocked-response strings
-|   |   `-- web_search.py        # DuckDuckGo fallback search
-|   |-- db/
-|   |   |-- database.py          # Async SQLAlchemy engine and session
-|   |   `-- models.py            # ORM models (users, sessions, agents, etc.)
-|   |-- live/
-|   |   |-- live_chat.py         # Socket.IO event handlers
-|   |   |-- sio_instance.py      # Shared Socket.IO server instance
-|   |   `-- state.py             # In-memory queue and session state
-|   |-- rag/
-|   |   |-- rag.py               # ChromaDB retrieval + HF embeddings
-|   |   `-- ingest.py            # Document ingestion pipeline
-|   |-- utils/
-|   |   `-- logger.py            # Centralized logging setup
-|   |-- config.py                # Groq client + dynamic env var access
-|   |-- keep_alive.py            # Self-ping script for free-tier hosting
-|   |-- main.py                  # FastAPI app, middleware, routes
-|   `-- requirements.txt
-|
-|-- frontend/
-|   |-- public/
-|   |   `-- widget.js            # Drop-in embeddable chatbot widget
-|   |-- src/
-|   |   |-- components/
-|   |   |   |-- Chatbot/         # Main chat UI component
-|   |   |   |-- LiveChatPanel/   # Live support chat panel
-|   |   |   `-- UserInfoModal/   # User info collection modal
-|   |   |-- pages/
-|   |   |   |-- AdminPanel/      # Admin management UI
-|   |   |   `-- AgentDashboard/  # Agent live-chat dashboard
-|   |   |-- config.js            # Frontend API URL and env config
-|   |   |-- App.jsx              # Route-based app entry point
-|   |   `-- main.jsx             # React DOM entry
-|   |-- index.html
-|   |-- vite.config.js
-|   `-- package.json
-|
-|-- .github/
-|   `-- workflows/
-|       `-- keep_alive.yml       # GitHub Actions keep-alive cron job
-|
-|-- Dockerfile                   # Multi-stage Docker build
-|-- .dockerignore
-`-- README.md
+```text
+├── backend/                    # FastAPI python backend service
+│   ├── auth/                   # Authentication & user/agent management APIs
+│   │   ├── auth.py             # User Google OAuth & phone login
+│   │   ├── agent_auth.py       # Support agent session auth
+│   │   ├── admin_auth.py       # Admin credential validation
+│   │   ├── admin_agents.py     # Live-chat agent CRUD endpoints
+│   │   ├── admin_config.py     # Dynamic system settings control
+│   │   └── admin_users.py      # Customer profile query APIs
+│   ├── chatbot/                # Core AI orchestrator
+│   │   ├── chatbot.py          # Response generation & SSE streaming
+│   │   ├── intent.py           # NLP intent classifiers
+│   │   ├── prompts.py          # System prompt builders
+│   │   ├── prompt_blocks.py    # Modular prompt components
+│   │   ├── data.py             # Static fallback query info
+│   │   ├── cache.py            # In-memory query-response caching
+│   │   ├── security.py         # Vulgarity & mood filters
+│   │   ├── responses.py        # Preset system responses
+│   │   └── web_search.py       # Scoped DuckDuckGo fallback search
+│   ├── db/                     # Data persistence layer
+│   │   ├── database.py         # SQLAlchemy engine & async session builder
+│   │   └── models.py           # ORM schemas (Users, Agents, Sessions)
+│   ├── live/                   # Human escalation support layer
+│   │   ├── live_chat.py        # Socket.IO bidirectional event handlers
+│   │   ├── sio_instance.py     # Shared WebSocket server instance
+│   │   └── state.py            # In-memory queue & claimed state management
+│   ├── rag/                    # Retrieval-Augmented Generation
+│   │   ├── rag.py              # ChromaDB vector retrieval logic
+│   │   └── ingest.py           # Knowledgebase ingestion script
+│   ├── utils/                  # System-wide helpers
+│   │   └── logger.py           # Structured debug logger
+│   ├── config.py               # Env var parsing & client initiations
+│   ├── keep_alive.py           # Free-tier server sleep preventer
+│   ├── main.py                 # FastAPI application root & middleware setup
+│   └── requirements.txt        # Python dependency manifest
+├── frontend/                   # React web application
+│   ├── public/
+│   │   ├── widget.js           # Independent drop-in iframe widget
+│   │   └── chatbot_mascot.png  # Asset: chatbot avatar mascot
+│   ├── src/
+│   │   ├── components/         # Reusable UI widgets
+│   │   │   ├── Chatbot/        # Floating chatbot bubble & dialogue frame
+│   │   │   ├── LiveChatPanel/  # Agent interface socket chat interface
+│   │   │   └── UserInfoModal/  # User profiling popup modal
+│   │   ├── pages/              # Routed pages
+│   │   │   ├── AdminPanel/     # Dynamic controls & agent creation dashboard
+│   │   │   └── AgentDashboard/ # Support ticket claiming and routing queue
+│   │   ├── config.js           # API route mapper & frontend client state
+│   │   ├── App.jsx             # Main react-router routing shell
+│   │   └── main.jsx            # Application render entrypoint
+│   ├── index.html              # HTML DOM anchor point
+│   ├── vite.config.js          # Vite bundler rules & api proxy setup
+│   └── package.json            # Node modules registry
+├── .github/workflows/
+│   └── keep_alive.yml          # Cron action to wake backend
+├── Dockerfile                  # Multi-stage production container instructions
+├── .dockerignore
+└── README.md                   # This project index page
 ```
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
+
+- **LLM Engine:** Groq API (Fast Inference)
+- **Vector Database:** ChromaDB with Hugging Face `all-MiniLM-L6-v2` embeddings
+- **Backend Framework:** FastAPI (Uvicorn, SQLAlchemy async)
+- **Real-time Communication:** Socket.IO (`python-socketio` & `socket.io-client`)
+- **Frontend Client:** React 19, Vite 8 (using Axios & `@react-oauth/google`)
+- **Containerization & CI/CD:** Docker (multi-stage build) & GitHub Actions
+
+### Detailed Tech Stack
 
 | Layer                  | Technology                                            |
 | ---------------------- | ----------------------------------------------------- |
@@ -264,7 +208,7 @@ MoneyCommandAI/
 
 ---
 
-## Getting Started
+## 💻 Getting Started
 
 ### Prerequisites
 
@@ -278,60 +222,58 @@ MoneyCommandAI/
 
 ### Backend Setup
 
-```bash
-# 1. Navigate to the backend directory
-cd MoneyCommandAI/backend
-
-# 2. Create and activate a virtual environment
-python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-
-# macOS/Linux
-source .venv/bin/activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Create your .env file (see Environment Variables section)
-# Copy and edit the example below
-```
+1. **Navigate to the backend directory:**
+   ```bash
+   cd backend
+   ```
+2. **Create and activate a virtual environment:**
+   - **Windows:**
+     ```bash
+     python -m venv .venv
+     .venv\Scripts\activate
+     ```
+   - **macOS/Linux:**
+     ```bash
+     python -m venv .venv
+     source .venv/bin/activate
+     ```
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Create your `.env` file:** Copy and edit the environment variables in a new `.env` file within the `backend/` directory.
 
 ---
 
 ### Frontend Setup
 
-```bash
-# Navigate to the frontend directory
-cd MoneyCommandAI/frontend
-
-# Install dependencies
-npm install
-```
-
-Create a `.env` file in the `frontend/` directory:
-
-```env
-# Leave VITE_API_URL blank in local dev — Vite proxy forwards to backend automatically
-VITE_API_URL=
-VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id
-VITE_PERSIST_SESSION=false
-```
+1. **Navigate to the frontend directory:**
+   ```bash
+   cd frontend
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Create a `.env` file in the `frontend/` directory:**
+   ```env
+   # Leave VITE_API_URL blank in local dev — Vite proxy forwards to backend automatically
+   VITE_API_URL=
+   VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id
+   VITE_PERSIST_SESSION=false
+   ```
 
 ---
 
 ### Running Locally
 
 **Terminal 1 — Backend:**
-
 ```bash
 cd backend
 uvicorn main:socket_app --host 0.0.0.0 --port 8002 --reload
 ```
 
 **Terminal 2 — Frontend:**
-
 ```bash
 cd frontend
 npm run dev
@@ -339,14 +281,14 @@ npm run dev
 
 The frontend dev server (default: `http://localhost:5173`) proxies API requests to the backend at `http://localhost:8002`.
 
-> **Admin Panel:** `http://localhost:5173/admin`
+> **Admin Panel:** `http://localhost:5173/admin`  
 > **Agent Dashboard:** `http://localhost:5173/agent`
 
 ---
 
-## Environment Variables
+## ⚙️ Environment Variables
 
-### Backend (`backend/.env`)
+### Backend Settings (`backend/.env`)
 
 | Variable              | Required    | Description                                                                            |
 | --------------------- | ----------- | -------------------------------------------------------------------------------------- |
@@ -363,9 +305,10 @@ The frontend dev server (default: `http://localhost:5173`) proxies API requests 
 | `ENABLE_RAG`          | ❌ Optional | `true` / `false` — Enable ChromaDB-based RAG retrieval (default: `false`).             |
 | `HF_TOKEN`            | ❌ Optional | Hugging Face API token for embeddings (required only if `ENABLE_RAG=true`).            |
 
-> ⚠️ **Never commit your `.env` file.** It is already listed in `.gitignore`.
+> [!WARNING]
+> **Never commit your `.env` file.** It is already listed in `.gitignore`.
 
-### Frontend (`frontend/.env`)
+### Frontend Settings (`frontend/.env`)
 
 | Variable                | Required    | Description                                                                                      |
 | ----------------------- | ----------- | ------------------------------------------------------------------------------------------------ |
@@ -375,18 +318,15 @@ The frontend dev server (default: `http://localhost:5173`) proxies API requests 
 
 ---
 
-## API Reference
+## 📖 API Reference
 
-All endpoints are served by the FastAPI backend.
-
-### Chat
+### Chat Endpoints
 
 | Method | Endpoint | Auth | Description                                                                                  |
 | ------ | -------- | ---- | -------------------------------------------------------------------------------------------- |
 | `POST` | `/chat`  | None | Send a message; returns an SSE stream of tokens, suggestions, citations, and a `done` event. |
 
-**Request body:**
-
+**Request Body Example:**
 ```json
 {
   "message": "How do I log an expense via Telegram?",
@@ -402,9 +342,9 @@ All endpoints are served by the FastAPI backend.
 }
 ```
 
-**SSE event types:**
+**SSE Event Types:**
 
-| Event type    | Description                                           |
+| Event Type    | Description                                           |
 | ------------- | ----------------------------------------------------- |
 | `token`       | A single character or word of the streaming response. |
 | `suggestions` | Array of follow-up question suggestions.              |
@@ -413,7 +353,7 @@ All endpoints are served by the FastAPI backend.
 
 ---
 
-### Health and Status
+### Health & Status
 
 | Method | Endpoint      | Description                                                     |
 | ------ | ------------- | --------------------------------------------------------------- |
@@ -457,7 +397,7 @@ All endpoints are served by the FastAPI backend.
 
 ---
 
-## Embeddable Widget
+## 🔌 Embeddable Widget
 
 The `widget.js` file in `frontend/public/` lets you embed the chatbot on any website with a single line:
 
@@ -465,101 +405,71 @@ The `widget.js` file in `frontend/public/` lets you embed the chatbot on any web
 <script src="https://your-deployed-domain.com/widget.js" async></script>
 ```
 
-**How it works:**
-
-- Injects a fixed-position `<iframe>` that loads the full chatbot UI.
-- **Responsive breakpoints:** fullscreen on mobile (≤480px), 480px overlay on tablet (≤768px), floating window on desktop.
-- Automatically detects the backend host from the script `src` attribute — no manual config needed.
-- **Single-instance guard** prevents duplicate iframes (safe for React strict-mode double-mounts).
-- Communicates with the parent page via `window.postMessage` (e.g., for open/close state).
+- **Dynamic Frame:** Injects a fixed-position `<iframe>` loading the chatbot UI.
+- **Breakpoints:** Responsive fullscreen layout on mobile (≤480px) and a standard overlay on tablet/desktop.
+- **Auto-Host Resolution:** Auto-detects the backend endpoint from the script `src` attribute.
+- **Communication:** Sends message events using the `postMessage` protocol.
 
 ---
 
-## Admin Panel
+## 🖥️ Admin Panel & Agent Dashboard
 
-Accessible at `/admin` (e.g., `http://localhost:5173/admin`).
+### Admin Panel (`/admin`)
+- Control Agent profiles (Create, Read, Delete).
+- Monitor all registered users.
+- Modify active configuration keys (RAG, live support, session persistence flags) on the fly without rebooting the backend service.
 
-**Capabilities:**
-
-- Login with admin credentials (seeded automatically on first run).
-- **Manage Agents** — Add or remove live support agent accounts.
-- **Manage Users** — View all registered users.
-- **App Settings** — Toggle RAG, live support, and session persistence on the fly. Changes apply without a server restart.
-
-**Default admin credentials** (change immediately after first login):
-
+**Default Credentials:**
 | Field    | Default Value                                             |
 | -------- | --------------------------------------------------------- |
 | Email    | `superadmin@moneycommandai.in` (or `ADMIN_EMAIL` env var) |
 | Password | `admin123` (or `ADMIN_PASSWORD` env var)                  |
 
----
-
-## Agent Dashboard
-
-Accessible at `/agent` (e.g., `http://localhost:5173/agent`).
-
-**Capabilities:**
-
-- Log in with agent credentials created by the admin.
-- View the live waiting queue in real time.
-- Claim incoming user sessions and engage in real-time chat.
-- Mark sessions as resolved.
-- View past resolved chat history.
+### Agent Dashboard (`/agent`)
+- Live queue parsing and visual ticket list.
+- Real-time Socket.IO chat windows for claimed sessions.
+- Status updating (resolve, escalate) and past interaction archive views.
 
 ---
 
-## Live Support System
+## 💬 Live Support System
 
-The live support flow uses **Socket.IO** for real-time bidirectional communication:
-
-1. User clicks "Talk to a Human" in the chat widget and joins the waiting queue.
-2. Server broadcasts the updated queue to all connected agents.
-3. Agent claims the session from their dashboard.
-4. Real-time chat begins between user and agent.
-5. Either party can end the session; the server updates the database and notifies both sides.
-
-**Stale session cleanup:** On server restart, all "waiting" sessions in the database are automatically resolved to prevent ghost queue entries.
-
-**Reliable unload cleanup:** When a user navigates away while waiting, `navigator.sendBeacon` calls `/api/live/cancel-queue` — unlike `socket.emit`, sendBeacon is guaranteed to fire before the page closes.
+1. **Ticket Request:** User clicks "Talk to a Human" and triggers queue entry.
+2. **Event Broadcast:** Server notifies all connected support agent sessions.
+3. **Claim Ticket:** An agent clicks claim to open a dedicated WebSocket lane.
+4. **Chat Session:** Real-time messages are shared using Socket.IO.
+5. **Garbage Cleanup:** If a user unloads the page before connection, `navigator.sendBeacon` triggers queue cancellation. Stale sessions automatically clear on system reboot.
 
 ---
 
-## RAG (Retrieval-Augmented Generation)
+## 🔍 RAG Ingestion & Vector DB
 
-The optional RAG system augments LLM responses with relevant knowledge from a pre-indexed document store.
+To enable ChromaDB document context retrieval:
+1. Set `ENABLE_RAG=true` and your Hugging Face API key in `backend/.env`.
+2. Seed the Chroma vector store by running the ingestion engine:
+   ```bash
+   cd backend
+   python -m rag.ingest
+   ```
+3. Restart the backend service.
 
-### Enabling RAG
+### Pipeline Details
 
-1. Set `ENABLE_RAG=true` in `backend/.env`.
-2. Set `HF_TOKEN` to your Hugging Face API token.
-3. Run the ingestion pipeline to populate ChromaDB:
-
-```bash
-cd backend
-python -m rag.ingest
-```
-
-4. Start the server — the chatbot will now retrieve and inject relevant context for each query.
-
-### How It Works
-
-| Step                | Details                                                                                  |
+| Stage               | Details                                                                                  |
 | ------------------- | ---------------------------------------------------------------------------------------- |
-| **Embedding model** | `sentence-transformers/all-MiniLM-L6-v2` via Hugging Face Inference API (384 dimensions) |
-| **Vector store**    | Local ChromaDB instance stored at `backend/chroma_db/`                                   |
-| **Retrieval**       | Top-k most semantically similar document chunks are fetched per query                    |
-| **Injection**       | Retrieved chunks are appended to the system prompt as `## Retrieved Help Details`        |
-| **Fallback**        | If RAG is disabled or unavailable, the chatbot falls back gracefully to prompt-only mode |
+| **Embedding Model** | `sentence-transformers/all-MiniLM-L6-v2` via Hugging Face Inference API (384 dimensions) |
+| **Vector Store**    | Local ChromaDB instance stored at `backend/chroma_db/`                                   |
+| **Retrieval Query** | Fetches top-k similar document chunks per user text prompt                               |
+| **System Injection**| Prepends context into system prompts as `## Retrieved Help Details`                      |
 
 ---
 
-## Docker Deployment
+## 🐳 Docker Deployment
 
-The project includes a **multi-stage Dockerfile** that builds the React frontend and packages it alongside the Python backend into a single, self-contained container.
+The multi-stage `Dockerfile` packages the React assets and FastAPI server together:
 
 ```bash
-# Build the Docker image from the project root
+# Build the Docker image
 docker build -t moneycommandai .
 
 # Run the container
@@ -570,94 +480,66 @@ docker run -d \
   moneycommandai
 ```
 
-The application will be available at `http://localhost:8002`.
+### Docker Stages
 
-### What the Dockerfile Does
-
-| Stage              | Base Image         | Action                                                                            |
-| ------------------ | ------------------ | --------------------------------------------------------------------------------- |
-| `frontend-builder` | `node:20-alpine`   | Installs npm dependencies and runs `npm run build`                                |
-| `backend`          | `python:3.11-slim` | Installs Python deps, copies backend source, copies frontend `dist/` from Stage 1 |
-
-The FastAPI app serves the static frontend and falls back to `index.html` for client-side routing. A Docker health check pings `/api/status` every 30 seconds.
+- **Stage 1 (Frontend Builder):** Uses `node:20-alpine` to compile assets into `frontend/dist/`.
+- **Stage 2 (Backend Production):** Uses `python:3.11-slim` to serve backend routes and static frontend bundles under Uvicorn. Includes a liveness health check target (`/api/status`).
 
 ---
 
-## CI/CD — Keep Alive Workflow
+## 🔄 CI/CD & Keep-Alive Workflows
 
-For deployments on free-tier platforms (e.g., Railway, Render) that spin down idle services, a GitHub Actions workflow keeps the backend warm.
+Deployments on free tiers (like Render/Railway) may spin down due to inactivity.
 
-**File:** `.github/workflows/keep_alive.yml`
-
-**Schedule:** Runs every 10 minutes between 08:00 AM and 02:00 AM IST (02:30 – 20:30 UTC).
-
-**What it does:** Runs `backend/keep_alive.py`, which makes HTTP GET requests to the health endpoint to prevent the service from going cold.
-
-You can also trigger it manually from the GitHub Actions UI via `workflow_dispatch`.
+- **Keep-Alive Script:** `backend/keep_alive.py` issues routine HTTP pings to the `/health` endpoint.
+- **Workflow schedule:** `.github/workflows/keep_alive.yml` fires every 10 minutes between 8:00 AM and 2:00 AM IST.
 
 ---
 
-## Security
+## 🛡️ Security & Content Safety
 
-| Area                   | Implementation                                                                            |
-| ---------------------- | ----------------------------------------------------------------------------------------- |
-| **JWT Signing**        | `JWT_SECRET_KEY` env var required; server exits at startup if unset or using the default. |
-| **Password Hashing**   | `bcrypt` via `passlib[bcrypt]`. Plain-text passwords are never stored.                    |
-| **CORS**               | Driven by `CORS_ORIGINS` env var; wildcard (`*`) automatically disables `credentials`.    |
-| **Rate Limiting**      | Per-IP sliding window: 30 req/60 s for chat, 5 attempts/10 min for auth endpoints.        |
-| **Content Safety**     | Vulgar and negative content filters run on every message before LLM invocation.           |
-| **Agent Registration** | `AGENT_ADMIN_SECRET` env var required to register new agent accounts.                     |
-| **Secrets Management** | `.env` is gitignored. All secrets are loaded from environment variables only.             |
-
-> ⚠️ **Important:** The example `.env` values in this repo are for local development only. **Rotate all secrets before deploying to production.**
+| Metric                 | Logic Details                                                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------ |
+| **JWT Verification**   | Enforces strong custom `JWT_SECRET_KEY` env validation; fails instantly if default.       |
+| **Data Hashing**       | Hashes passwords with `bcrypt` encryption before committing to DB.                         |
+| **CORS Guard**         | Restricts browser domains via `CORS_ORIGINS`; wildcard blocks cross-site cookie usage.     |
+| **Rate Limiters**      | Chat triggers limit at 30 req/min; Authorization calls throttle at 5 attempts/10 min.      |
+| **Content Screening**  | Rejects vulgar phrases and responds to hostile users using negative sentiment prompts.      |
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-1. Fork the repository.
-2. Create a feature branch:
-
-```bash
-git checkout -b feature/your-feature-name
-```
-
-3. Make your changes with clear, descriptive commit messages.
-4. Run the backend tests:
-
-```bash
-cd backend
-pytest
-```
-
-5. Open a Pull Request describing what you changed and why.
+1. Fork this project repository.
+2. Branch out to your feature:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit with descriptive descriptions and write unit tests where possible.
+4. Verify backend functionality:
+   ```bash
+   cd backend
+   pytest
+   ```
+5. Submit a pull request detailing your improvements.
 
 ---
 
-## License
+## 📄 License
 
 This project is proprietary software. All rights reserved.
 
 ---
 
-<div align="center">
+## 📬 Contact & Connect
 
-  <img src="https://raw.githubusercontent.com/kabilannadar/MoneyCommandAI-Assistant/main/frontend/public/chatbot_mascot.png" alt="MoneyCommandAI Mascot" width="120" />
+- **Live App:** [ExpenseTracker](https://expensetrackertn.vercel.app)
+- **Telegram Bot:** [@expensetrackertnbot](https://t.me/expensetrackertnbot)
+- **Support & Feedback:** [ExpenseTracker Support](https://expensetrackertn.vercel.app/support)
+- **Email:** [r.r.kabilan0335@gmail.com](mailto:r.r.kabilan0335@gmail.com)
 
-  <h3>MoneyCommandAI Assistant</h3>
+---
 
-  <p>Powered by <a href="https://expensetrackertn.vercel.app"><strong>ExpenseTracker</strong></a></p>
-
-  <p>
-    <a href="https://expensetrackertn.vercel.app">🌐 Live App</a>
-    &nbsp;•&nbsp;
-    <a href="https://expensetrackertn.vercel.app/support">💬 Support & Feedback</a>
-    &nbsp;•&nbsp;
-    <a href="https://t.me/expensetrackertnbot">🤖 Telegram Bot</a>
-    &nbsp;•&nbsp;
-    <a href="mailto:r.r.kabilan0335@gmail.com">✉️ Email Us</a>
-  </p>
-
-<sub>© 2026 MoneyCommandAI. All rights reserved.</sub>
-
-</div>
+<p align="center">
+  <sub>© 2026 MoneyCommandAI. Powered by ExpenseTracker. All rights reserved.</sub>
+</p>
