@@ -1,6 +1,43 @@
-﻿# MoneyCommandAI Assistant
+<div align="center">
 
-> **The smart AI support layer embedded inside [ExpenseTracker](https://expensetrackertn.vercel.app) — helping users get the most out of their personal finance app via natural language chat.**
+  <img src="https://raw.githubusercontent.com/kabilannadar/MoneyCommandAI-Assistant/main/frontend/public/MoneyCommandAI_Chatbot_Banner.png" alt="MoneyCommandAI Assistant Banner" width="100%" />
+
+  <h1>MoneyCommandAI Assistant</h1>
+
+  <p><strong>The smart AI support layer embedded inside <a href="https://expensetrackertn.vercel.app">ExpenseTracker</a> — helping users master their personal finances via natural language chat.</strong></p>
+
+  <!-- Badges -->
+  <p>
+    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/blob/main/LICENSE">
+      <img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square" alt="License" />
+    </a>
+    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/actions">
+      <img src="https://img.shields.io/github/actions/workflow/status/kabilannadar/MoneyCommandAI-Assistant/keep_alive.yml?label=keep-alive&style=flat-square" alt="Keep Alive" />
+    </a>
+    <img src="https://img.shields.io/badge/python-3.11-blue?style=flat-square&logo=python" alt="Python 3.11" />
+    <img src="https://img.shields.io/badge/FastAPI-0.111-009688?style=flat-square&logo=fastapi" alt="FastAPI" />
+    <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React 19" />
+    <img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite" alt="Vite 8" />
+    <img src="https://img.shields.io/badge/LLM-Groq-FF6B00?style=flat-square" alt="Groq LLM" />
+    <img src="https://img.shields.io/badge/Vector_DB-ChromaDB-6C3483?style=flat-square" alt="ChromaDB" />
+    <img src="https://img.shields.io/badge/Socket.IO-realtime-010101?style=flat-square&logo=socket.io" alt="Socket.IO" />
+    <img src="https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker" alt="Docker" />
+  </p>
+
+  <!-- Quick Links -->
+  <p>
+    <a href="https://expensetrackertn.vercel.app"><strong>🌐 Live App</strong></a>
+    &nbsp;•&nbsp;
+    <a href="https://expensetrackertn.vercel.app/support"><strong>💬 Support & Feedback</strong></a>
+    &nbsp;•&nbsp;
+    <a href="https://t.me/expensetrackertnbot"><strong>🤖 Telegram Bot</strong></a>
+    &nbsp;•&nbsp;
+    <a href="#getting-started"><strong>🚀 Get Started</strong></a>
+    &nbsp;•&nbsp;
+    <a href="#api-reference"><strong>📖 API Docs</strong></a>
+  </p>
+
+</div>
 
 ---
 
@@ -600,3 +637,37 @@ pytest
 ## License
 
 This project is proprietary software. All rights reserved.
+
+---
+
+<div align="center">
+
+  <img src="https://raw.githubusercontent.com/kabilannadar/MoneyCommandAI-Assistant/main/frontend/public/chatbot_mascot.png" alt="MoneyCommandAI Mascot" width="120" />
+
+  <h3>MoneyCommandAI Assistant</h3>
+
+  <p>Built with ❤️ for <a href="https://expensetrackertn.vercel.app"><strong>ExpenseTracker</strong></a></p>
+
+  <p>
+    <a href="https://expensetrackertn.vercel.app">🌐 Live App</a>
+    &nbsp;•&nbsp;
+    <a href="https://expensetrackertn.vercel.app/support">💬 Support & Feedback</a>
+    &nbsp;•&nbsp;
+    <a href="https://t.me/expensetrackertnbot">🤖 Telegram Bot</a>
+    &nbsp;•&nbsp;
+    <a href="mailto:support@moneycommandai.in">✉️ Email Us</a>
+  </p>
+
+  <p>
+    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant">
+      <img src="https://img.shields.io/github/stars/kabilannadar/MoneyCommandAI-Assistant?style=social" alt="GitHub Stars" />
+    </a>
+    &nbsp;
+    <a href="https://github.com/kabilannadar/MoneyCommandAI-Assistant/fork">
+      <img src="https://img.shields.io/github/forks/kabilannadar/MoneyCommandAI-Assistant?style=social" alt="GitHub Forks" />
+    </a>
+  </p>
+
+  <sub>© 2026 MoneyCommandAI. All rights reserved.</sub>
+
+</div>
