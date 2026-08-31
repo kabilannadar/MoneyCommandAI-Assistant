@@ -1,5 +1,3 @@
-# 📂 MoneyCommandAI Assistant
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/kabilannadar/MoneyCommandAI-Assistant/main/frontend/public/MoneyCommandAI_Chatbot_Banner.png" alt="MoneyCommandAI Assistant Banner" width="100%" />
 </p>
