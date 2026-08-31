@@ -179,7 +179,7 @@ async def response_generator(
 
     def _make_groq_call(temperature=0.5):
         return groq_client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="qwen/qwen3.8-27b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 *format_history(history),
